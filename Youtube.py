@@ -15,8 +15,10 @@ class Youtube:
         return soup
 
     def getVideosName(self, soup):
-        a = soup.select("#contents ytd-video-renderer #video-title")
-        print(a)
+        title_obj = soup.select("#contents ytd-video-renderer #video-title")
+        title_list = list(map(lambda item: item['title'], title_obj))
+        return title_list
+
         
 
 
