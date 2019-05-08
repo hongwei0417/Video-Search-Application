@@ -39,7 +39,7 @@ vsb.pack(side="right", fill="y")
 canvas.pack(side="left", fill="both", expand=True)
 canvas.create_window(0,0, window=frame, anchor="nw")
 
-frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
+frame.bind("<Configure>", lambda event,_canvas=canvas: onFrameConfigure(_canvas))
 
 
 top_frame = tk.Frame(frame, bg=top_bgc, width=ww, height=60)
@@ -56,7 +56,7 @@ fbFrame.place(x=10, y=520)
 
 ytImg_open = Image.open('./Asset/yt.png').resize((100,60), Image.ANTIALIAS)
 ytImg = ImageTk.PhotoImage(ytImg_open)
-ytLogo = tk.Label(ytFrame, image=ytImg, borderwidth=0)
+ytLogo = tk.Label(ytFrame, image=ytImg, bg=fbgc, borderwidth=0)
 ytLogo.place(x=10, y=20)
 
 # test_open = Image.open('./Asset/google.png').resize((100,100), Image.ANTIALIAS)
@@ -72,25 +72,25 @@ ytLogo.place(x=10, y=20)
 # testLogo.bind("<Button-1>", lambda x: print(123))
 
 v1 = Video(ytFrame)
-v1.setUrl('https://i.ytimg.com/vi/b4hTJLtCcUw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCG5gA6AgbGPbjOknIjavjQA5YsLg')
+v1.setUrl('https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg')
 v1.setPos(130,0)
 v1.setInfo({'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'})
 v1.locate()
 
-v2 = Video(ytFrame)
-v2.setUrl('https://i.ytimg.com/vi/b4hTJLtCcUw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCG5gA6AgbGPbjOknIjavjQA5YsLg')
-v2.setPos(280,0)
-v2.locate()
+# v2 = Video(ytFrame)
+# v2.setUrl('https://i.ytimg.com/vi/b4hTJLtCcUw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCG5gA6AgbGPbjOknIjavjQA5YsLg')
+# v2.setPos(280,0)
+# v2.locate()
 
-v3 = Video(ytFrame)
-v3.setUrl('https://i.ytimg.com/vi/b4hTJLtCcUw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCG5gA6AgbGPbjOknIjavjQA5YsLg')
-v3.setPos(430,0)
-v3.locate()
+# v3 = Video(ytFrame)
+# v3.setUrl('https://i.ytimg.com/vi/b4hTJLtCcUw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCG5gA6AgbGPbjOknIjavjQA5YsLg')
+# v3.setPos(430,0)
+# v3.locate()
 
-v4 = Video(ytFrame)
-v4.setUrl('https://i.ytimg.com/vi/b4hTJLtCcUw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCG5gA6AgbGPbjOknIjavjQA5YsLg')
-v4.setPos(580,0)
-v4.locate()
+# v4 = Video(ytFrame)
+# v4.setUrl('https://i.ytimg.com/vi/b4hTJLtCcUw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCG5gA6AgbGPbjOknIjavjQA5YsLg')
+# v4.setPos(580,0)
+# v4.locate()
 
 # response = requests.get('https://is2-ssl.mzstatic.com/image/thumb/Purple128/v4/fb/26/01/fb2601b9-27b3-a701-f011-48808eaae98d/source/256x256bb.jpg')
 # img_data = response.content

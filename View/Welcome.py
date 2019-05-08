@@ -29,7 +29,7 @@ vsb.pack(side="right", fill="y")
 canvas.pack(side="left", fill="both", expand=True)
 canvas.create_window((4,4), window=frame, anchor="nw")
 
-frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
+frame.bind("<Configure>", lambda event, _canvas=canvas: onFrameConfigure(_canvas))
 
 # populate(frame) ##資料測試
 
@@ -43,9 +43,12 @@ l.place(anchor=tk.CENTER, x=400, y=100, height=50, width=300)    # 固定窗口�
 
 
 
+b = tk.Button(window, 
+    text='hit me',      # 显示在按钮上的文字
+    width=15, height=2, command=lambda : print(123), relief="raised"
+    ) 
 
-
-
+b.place(x=100, y=100)
 
 
 
