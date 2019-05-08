@@ -19,8 +19,6 @@ class Youtube:
         title_list = list(map(lambda item: item['title'], title_obj))
         return title_list
 
-        
-
 
 
 

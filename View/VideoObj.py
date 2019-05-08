@@ -13,9 +13,9 @@ class Video:
         self.fbgc = "#1C1C1C"
         self.frame = tk.Frame(frame, width=self.w, height=self.h, bg=self.fbgc)
         self.video = tk.Button(self.frame, borderwidth=0, )
-        self.title = tk.Label(self.frame, wraplength=130, bg=self.fbgc, fg="white", font=('Arial', 10), anchor="n", justify = 'left')
-        self.author = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 9))
-        self.views = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 9))
+        self.title = tk.Label(self.frame, wraplength=130, bg=self.fbgc, fg="white", font=('Arial', 12), anchor="n", justify = 'left')
+        self.author = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 10))
+        self.views = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 10))
 
     def setImg(self, url):
         self.video_img = openOnline(url, self.w, 100)
@@ -33,7 +33,7 @@ class Video:
     def locate(self):
         self.frame.place(x=self.x, y=self.y)
         self.video.place(x=0, y=10)
-        self.title.place(x=0, y=115, width=self.w, height=35)
+        self.title.place(x=0, y=120, width=self.w, height=35)
         self.author.place(x=0, y=155, width=self.w)
         self.views.place(x=0, y=175, width=self.w)
         
@@ -48,8 +48,8 @@ class VideoList:
         self.vList = {}
         self.frame = tk.Frame(frame, bg=self.fbgc, width=self.fw, height=self.fh)
         self.logo = tk.Label(self.frame, bg=self.fbgc, borderwidth=0)
-        self.up = tk.Button(self.frame, text="▲", font=30, bg=self.fbgc, fg="white", borderwidth=0)
-        self.down = tk.Button(self.frame, text="▼", font=30, bg=self.fbgc, fg="white", borderwidth=0)
+        self.up = tk.Button(self.frame, text="▲", font=30, bg=self.fbgc, highlightbackground=self.fbgc, fg="white", borderwidth=0)
+        self.down = tk.Button(self.frame, text="▼", font=30, bg=self.fbgc, highlightbackground=self.fbgc, fg="white", borderwidth=0)
 
     def set(self, logoUrl, urls, infos):
         posX = 130
@@ -64,8 +64,12 @@ class VideoList:
             video.setPos(posX, 0)
             posX += 150
 
+    def setPos(self, x, y):
+        self.x = x
+        self.y = y
+
     def load(self):
-        self.frame.place(x=10, y=80)
+        self.frame.place(x=self.x, y=self.y)
         self.logo.place(x=10, y=20)
         self.up.place(x=727, y=40, height=25, width=25)
         self.down.place(x=727, y=140, height=25, width=25)

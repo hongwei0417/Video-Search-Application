@@ -18,14 +18,6 @@ window.geometry(str(ww) + 'x' + str(wh))
 window.resizable(False, False)
 window.configure(background=bgc)
 
-
-def populate(frame):
-        '''Put in some fake data'''
-        for row in range(100):
-                tk.Label(frame, text="%s" % row, width=3, borderwidth="1", relief="solid").grid(row=row, column=0)
-                t="this is the second column for row %s" %row
-                tk.Label(frame, text=t).grid(row=row, column=1)
-
 def onFrameConfigure(canvas):
         '''Reset the scroll region to encompass the inner frame'''
         canvas.configure(scrollregion=canvas.bbox("all"))
@@ -44,31 +36,47 @@ frame.bind("<Configure>", lambda event,_canvas=canvas: onFrameConfigure(_canvas)
 top_frame = tk.Frame(frame, bg=top_bgc, width=ww, height=60)
 top_frame.place(x=0, y=0)
 
-# ytFrame = tk.Frame(frame, bg=fbgc, width=fw, height=fh)
-# ytFrame.place(x=10, y=80)
+search_tb = tk.Entry(
+                top_frame,
+                width=30, bg=fbgc,
+                highlightbackground="#303030",
+                highlightthickness=2,
+                highlightcolor='#666666',
+                fg="white",
+                relief="flat",
+                font=('Verdana',20),
+                )
+search_tb.place(x=170, y=15)
 
-# yhFrame = tk.Frame(frame, bg=fbgc, width=fw, height=fh)
-# yhFrame.place(x=10, y=300)
+search_btn = tk.Button(top_frame, text="搜尋")
+search_btn.place(x=600, y=20)
 
-# fbFrame = tk.Frame(frame, bg=fbgc, width=fw, height=fh)
-# fbFrame.place(x=10, y=520)
+# logoUrl = './Asset/yt.png'
+# urls = ['https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
+#         'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
+#         'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
+#         'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg'
+#         ]
+# infos = [{'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
+#         {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
+#         {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
+#         {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'}
+#         ]
 
-logoUrl = './Asset/yt.png'
-urls = ['https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
-        'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
-        'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
-        'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg'
-        ]
-infos = [{'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
-        {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
-        {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
-        {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'}
-        ]
-vl = VideoList(frame)
-vl.set(logoUrl, urls, infos)
-vl.load()
+# ytList = VideoList(frame)
+# ytList.set(logoUrl, urls, infos)
+# ytList.setPos(10, 80)
+# ytList.load()
 
+# fbList = VideoList(frame)
+# fbList.set(logoUrl, urls, infos)
+# fbList.setPos(10, 300)
+# fbList.load()
 
-# populate(frame) ##資料測試
+# yhList = VideoList(frame)
+# yhList.set(logoUrl, urls, infos)
+# yhList.setPos(10, 520)
+# yhList.load()
+
 
 window.mainloop()
