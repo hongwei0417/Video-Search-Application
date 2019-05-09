@@ -48,35 +48,35 @@ search_tb = tk.Entry(
                 )
 search_tb.place(x=170, y=15)
 
-search_btn = tk.Button(top_frame, text="搜尋")
-search_btn.place(x=600, y=20)
+search_btn = tk.Button(top_frame, text="搜尋", fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
+search_btn.place(x=580, y=17, height=30, width=50)
 
-# logoUrl = './Asset/yt.png'
-# urls = ['https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
-#         'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
-#         'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
-#         'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg'
-#         ]
-# infos = [{'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
-#         {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
-#         {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
-#         {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'}
-#         ]
+logoUrl = './Asset/yt.png'
+urls = ['https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
+        'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
+        'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg',
+        'https://i.ytimg.com/vi/J-7SaPOAA24/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAM3g8k5tpc0LPMQeHWQcu3HdR0vg'
+        ]
+infos = [{'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
+        {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
+        {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'},
+        {'title': '【Faker】解謎遊戲天才！芭芭是你系列第一集','author': '中譯版今日韓服精華','views': '觀看次數：113萬次'}
+        ]
 
-# ytList = VideoList(frame)
-# ytList.set(logoUrl, urls, infos)
-# ytList.setPos(10, 80)
-# ytList.load()
+ytList = VideoList(frame)
+ytList.set(logoUrl, urls, infos)
+ytList.setPos(10, 80)
+ytList.load()
 
-# fbList = VideoList(frame)
-# fbList.set(logoUrl, urls, infos)
-# fbList.setPos(10, 300)
-# fbList.load()
+fbList = VideoList(frame)
+fbList.set(logoUrl, urls, infos)
+fbList.setPos(10, 300)
+fbList.load()
 
-# yhList = VideoList(frame)
-# yhList.set(logoUrl, urls, infos)
-# yhList.setPos(10, 520)
-# yhList.load()
+yhList = VideoList(frame)
+yhList.set(logoUrl, urls, infos)
+yhList.setPos(10, 520)
+yhList.load()
 
 
 window.mainloop()

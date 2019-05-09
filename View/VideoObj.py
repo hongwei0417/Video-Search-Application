@@ -12,7 +12,7 @@ class Video:
         self.h = 200
         self.fbgc = "#1C1C1C"
         self.frame = tk.Frame(frame, width=self.w, height=self.h, bg=self.fbgc)
-        self.video = tk.Button(self.frame, borderwidth=0, )
+        self.video = tk.Button(self.frame, borderwidth=0, highlightbackground=self.fbgc, relief="groove")
         self.title = tk.Label(self.frame, wraplength=130, bg=self.fbgc, fg="white", font=('Arial', 12), anchor="n", justify = 'left')
         self.author = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 10))
         self.views = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 10))
@@ -48,8 +48,8 @@ class VideoList:
         self.vList = {}
         self.frame = tk.Frame(frame, bg=self.fbgc, width=self.fw, height=self.fh)
         self.logo = tk.Label(self.frame, bg=self.fbgc, borderwidth=0)
-        self.up = tk.Button(self.frame, text="▲", font=30, bg=self.fbgc, highlightbackground=self.fbgc, fg="white", borderwidth=0)
-        self.down = tk.Button(self.frame, text="▼", font=30, bg=self.fbgc, highlightbackground=self.fbgc, fg="white", borderwidth=0)
+        self.up = tk.Button(self.frame, text="▲", font=30, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
+        self.down = tk.Button(self.frame, text="▼", font=30, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
 
     def set(self, logoUrl, urls, infos):
         posX = 130
