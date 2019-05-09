@@ -17,3 +17,6 @@ def openOnline(url, w, h):
     img_open = Image.open(BytesIO(img_data)).resize((w,h), Image.ANTIALIAS)
     img = ImageTk.PhotoImage(img_open)
     return img
+
+
+print(tk.TkVersion)
