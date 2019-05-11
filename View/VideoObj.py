@@ -3,7 +3,7 @@ import requests
 from PIL import ImageTk, Image
 from io import BytesIO
 from urllib.request import urlopen
-from Tools import openLocal, openOnline
+from View.Tools import openLocal, openOnline
 
 class Video:
     
@@ -21,10 +21,10 @@ class Video:
         self.video_img = openOnline(url, self.w, 100)
         self.video.config(image = self.video_img)
         
-    def setInfo(self, info):
-        self.title.config(text=info["title"])
-        self.author.config(text=info["author"])
-        self.views.config(text=info['views'])
+    def setInfo(self, title, author, view):
+        self.title.config(text=title)
+        self.author.config(text=author)
+        self.views.config(text=view)
 
     def setPos(self, x, y):
         self.x = x
@@ -51,16 +51,16 @@ class VideoList:
         self.up = tk.Button(self.frame, text="▲", font=30, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
         self.down = tk.Button(self.frame, text="▼", font=30, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
 
-    def set(self, logoUrl, urls, infos):
+    def set(self, logoUrl, urls, titles, authors, views):
         posX = 130
         logoImg = openLocal(logoUrl, 100, 60)
         self.logo.configure(image=logoImg)
         self.logo.image = logoImg
-        for n in range(len(urls)):
+        for n in range(4):
             self.vList['v'+str(n+1)] = Video(self.frame)
             video = self.vList['v'+str(n+1)]
             video.setImg(urls[n])
-            video.setInfo(infos[n])
+            video.setInfo(titles[n], authors[n], views[n])
             video.setPos(posX, 0)
             posX += 150
 

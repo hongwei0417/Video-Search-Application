@@ -14,7 +14,8 @@ def openOnline(url, w, h):
     response = requests.get(url)
     img_data = response.content
     # img_data = urlopen(url).read()
-    img_open = Image.open(BytesIO(img_data)).resize((w,h), Image.ANTIALIAS)
+    byte_data = BytesIO(img_data)
+    img_open = Image.open(byte_data).resize((w,h), Image.ANTIALIAS)
     img = ImageTk.PhotoImage(img_open)
     return img
 

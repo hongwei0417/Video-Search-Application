@@ -1,31 +1,17 @@
-# import View.Welcome
+import View.Video as Video
+from Module.Driver import scroll
 from Module.Youtube import Youtube
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+import time
 
-# View.window.mainloop()
+###### for windows ######
+# driver1 = webdriver.Chrome('D:\Hongwei\Python\chromedriver')
+# driver2 = webdriver.Chrome('D:\Hongwei\Python\chromedriver')
 
-# for windows
-driver1 = webdriver.Chrome('D:\Hongwei\Python\chromedriver')
-driver2 = webdriver.Chrome('D:\Hongwei\Python\chromedriver')
-
-# for macos
-# driver1 = webdriver.Chrome('/Users/hongwei/Documents/Python/chromedriver')
+###### for macos ######
+driver1 = webdriver.Chrome('/Users/hongwei/Documents/Python/chromedriver')
 # driver2 = webdriver.Chrome('/Users/hongwei/Documents/Python/chromedriver')
 
+Video.init([driver1])
 
-yt1 = Youtube(driver1)
-soup = yt1.search("一拳超人")
-
-yt2 = Youtube(driver2)
-soup = yt2.search("長庚大學")
-
-
-# yt.getData()
-
-# yt.scroll()
-
-
-
-
-# browser.close()
+driver1.close()

@@ -1,10 +1,7 @@
 import requests
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
 from bs4 import BeautifulSoup
 import time
-
-
+import Module.Driver as Driver
 class Youtube:
 
     def __init__(self, browser):
@@ -14,27 +11,31 @@ class Youtube:
     def search(self, keyword):
         url = self.url + keyword
         self.browser.get(url)
-        self.soup = BeautifulSoup(self.browser.page_source, 'html.parser')
-        return self.soup
+        self.updateSoup()
+
+    def updateSoup(self):
+        source = self.browser.page_source
+        self.soup = BeautifulSoup(source, 'html.parser')
 
     def getData(self):
         data = {}
-        imgs = self.getImgs()
-        titles = self.getTitles()
-        authors = self.getAuthors()
-        views = self.getViews()
+        data['imgs'] = self.getImgs()
+        data['titles'] = self.getTitles()
+        data['authors'] = self.getAuthors()
+        data['views'] = self.getViews()
 
-        print(imgs)
-        print('-------------------------------------------------------')
-        print(titles)
-        print('-------------------------------------------------------')
-        print(authors)
-        print('-------------------------------------------------------')
-        print(views)
-        print('-------------------------------------------------------')
+        # print(imgs)
+        # print('-------------------------------------------------------')
+        # print(titles)
+        # print('-------------------------------------------------------')
+        # print(authors)
+        # print('-------------------------------------------------------')
+        # print(views)
+        # print('-------------------------------------------------------')
 
-        print(len(imgs),len(titles),len(authors),len(views))
+        print(len(data['imgs']),len(data['titles']),len(data['authors']),len(data['views']))
 
+        return data
 
     def getImgs(self):
         img_obj = self.soup.select('#contents ytd-video-renderer #img[src]')
@@ -56,19 +57,12 @@ class Youtube:
         view_list = list(map(lambda item: item.text.strip(), view_obj))
         return view_list
 
-    def scroll(self):
-        for i in range(5):
-            elm = self.browser.find_element_by_tag_name('html')
-            elm.send_keys(Keys.END)
-            time.sleep(5)
-
-    def openTab(self):
-        # ActionChains(self.browser).key_down(Keys.CONTROL).send_keys('t').key_up(Keys.CONTROL).perform()
-        self.browser.execute_script("window.open('https://www.google.com');")
-
-
-
-
+    def getMore(self, pages=1):
+        for i in range(pages):
+            Driver.scroll(self.browser)
+        self.updateSoup()
+        data = self.getData()
+        return data
 
 
 
