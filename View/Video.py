@@ -23,13 +23,22 @@ def init(browsers):
         create([yt])
 
 def search(engines, text, ytList):
-        yt = engines[0]
-        yt.search(text.strip())
-        yt_data = yt.getData()
-        while(len(yt_data['imgs']) < 4):
-                yt_data = yt.getMore()
-        
-        ytList.set(logoUrl[0], yt_data['imgs'], yt_data['titles'], yt_data['authors'], yt_data['views'])
+        if(not(text.strip() == '')):
+                yt = engines[0]
+                yt.search(text.strip())
+                yt_data = yt.getData()
+                count = len(yt_data['imgs'])
+                while(count < 4):
+                        yt_data = yt.getMore()
+                        if(count == len(yt_data['imgs'])): # 沒取得新資料
+                                break
+                        else:
+                                count = len(yt_data['imgs']) # 有取的新資料
+                ytList.page = 1
+                ytList.setData(yt_data)
+                ytList.load()
+        else:
+                print('搜尋字串空白')
 
 
 def create(engines):
@@ -38,6 +47,7 @@ def create(engines):
         window.geometry(str(ww) + 'x' + str(wh))
         window.resizable(False, False)
         window.configure(background=bgc)
+
 
         canvas = tk.Canvas(window, borderwidth=0, background=bgc, highlightthickness=0, relief='ridge')
         frame = tk.Frame(canvas, background=bgc, width=ww, height=ww)
@@ -76,8 +86,9 @@ def create(engines):
         
 
         ytList = VideoList(frame)
+        ytList.set(logoUrl[0], engines[0])
         ytList.setPos(10, 80)
-        ytList.load()
+        
 
         # fbList = VideoList(frame)
         # fbList.set(logoUrl, urls, infos)

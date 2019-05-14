@@ -23,6 +23,7 @@ class Youtube:
         data['titles'] = self.getTitles()
         data['authors'] = self.getAuthors()
         data['views'] = self.getViews()
+        data['hrefs']= self.getLinks()
 
         # print(imgs)
         # print('-------------------------------------------------------')
@@ -33,7 +34,7 @@ class Youtube:
         # print(views)
         # print('-------------------------------------------------------')
 
-        print(len(data['imgs']),len(data['titles']),len(data['authors']),len(data['views']))
+        print(len(data['imgs']), len(data['hrefs']), len(data['titles']),len(data['authors']),len(data['views']))
 
         return data
 
@@ -57,11 +58,17 @@ class Youtube:
         view_list = list(map(lambda item: item.text.strip(), view_obj))
         return view_list
 
+    def getLinks(self):
+        src_obj = self.soup.select('#contents ytd-video-renderer #thumbnail')
+        src_list = list(map(lambda item: item['href'], src_obj))
+        return src_list
+
     def getMore(self, pages=1):
         for i in range(pages):
             Driver.scroll(self.browser)
         self.updateSoup()
         data = self.getData()
+            
         return data
 
 
