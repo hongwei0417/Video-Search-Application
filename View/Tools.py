@@ -19,5 +19,3 @@ def openOnline(url, w, h):
     img = ImageTk.PhotoImage(img_open)
     return img
 
-
-print(tk.TkVersion)

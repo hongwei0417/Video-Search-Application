@@ -19,21 +19,36 @@ class Youtube:
 
     def getData(self):
         data = {}
-        data['imgs'] = self.getImgs()
-        data['titles'] = self.getTitles()
-        data['authors'] = self.getAuthors()
-        data['views'] = self.getViews()
-        data['hrefs']= self.getLinks()
+        # data['imgs'] = self.getImgs()
+        # data['titles'] = self.getTitles()
+        # data['authors'] = self.getAuthors()
+        # data['views'] = self.getViews()
+        # data['hrefs']= self.getLinks()
 
-        # print(imgs)
-        # print('-------------------------------------------------------')
-        # print(titles)
-        # print('-------------------------------------------------------')
-        # print(authors)
-        # print('-------------------------------------------------------')
-        # print(views)
-        # print('-------------------------------------------------------')
+        data['imgs'] = []
+        data['titles'] = []
+        data['authors'] = []
+        data['views'] = []
+        data['hrefs'] = []
+        video_obj = self.soup.select('#contents ytd-video-renderer')
 
+        for video in video_obj:
+            img_obj = video.select('#img')[0]
+
+            if img_obj.has_attr('src'): # 判斷有沒有圖片
+                img = img_obj['src']
+                title = video.select('#video-title')[0]['title']
+                author = video.select('#byline')[0]['title']
+                view = video.select('#metadata-line span:first-child')[0].text.strip()
+                href = video.select('#thumbnail')[0]['href']
+                data['imgs'].append(img)
+                data['titles'].append(title)
+                data['authors'].append(author)
+                data['views'].append(view)
+                data['hrefs'].append(href)
+            else:
+                continue # 沒有圖片就放棄取下一個影片
+        
         print(len(data['imgs']), len(data['hrefs']), len(data['titles']),len(data['authors']),len(data['views']))
 
         return data

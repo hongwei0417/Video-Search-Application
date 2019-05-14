@@ -45,12 +45,10 @@ class Video:
         self.views = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 10))
 
     def setImg(self, url):
-        print(url)
         self.video_img = openOnline(url, self.w, 100)
         self.video.config(image = self.video_img)
     
     def setLink(self, href):
-        print(href)
         self.video.bind('<Button-1>', lambda x: webbrowser.open(href))
         
     def setInfo(self, title, author, view):
