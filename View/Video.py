@@ -1,9 +1,8 @@
 import tkinter as tk
-import requests
-from PIL import ImageTk, Image
 from View.VideoObj import Video, VideoList
+import  Module.Driver as Driver
 from Module.Youtube import Youtube
-from io import BytesIO
+from Module.Bili import Bili
 
 wh = 500
 ww = 800
@@ -12,33 +11,40 @@ fw = 760
 bgc = "#121212"
 top_bgc = "#272727"
 fbgc = "#1C1C1C"
-logoUrl = ['./Asset/yt.png']
+links = ['https://www.youtube.com', '']
+logoUrl = ['./Asset/youtube.png', './Asset/bili.jpg']
 
 def onFrameConfigure(canvas):
         '''Reset the scroll region to encompass the inner frame'''
         canvas.configure(scrollregion=canvas.bbox("all"))
 
-def init(browsers):
-        yt = Youtube(browsers[0])
-        create([yt])
+def init(browser):
+        yt = Youtube(browser)
+        bili = Bili(browser)
+        create([yt, bili])
 
-def search(engines, text, ytList):
+def search_All(engines, vlists, text):
         if(not(text.strip() == '')):
-                yt = engines[0]
-                yt.search(text.strip())
-                yt_data = yt.getData()
-                count = len(yt_data['imgs'])
-                while(count < 4):
-                        yt_data = yt.getMore()
-                        if(count == len(yt_data['imgs'])): # 沒取得新資料
-                                break
-                        else:
-                                count = len(yt_data['imgs']) # 有取的新資料
-                ytList.page = 1
-                ytList.setData(yt_data)
-                ytList.load()
+                search(engines[0], vlists[0], text)
+                search(engines[1], vlists[1], text)
         else:
                 print('搜尋字串空白')
+
+def search(engine, vlist, text):
+        engine.search(text.strip())
+        data = engine.getData()
+        count = len(data['imgs'])
+        while(count < 4):
+                data = engine.getMore()
+                if(count == len(data['imgs'])): # 沒取得新資料
+                        break
+                else:
+                        count = len(data['imgs']) # 有取的新資料
+        vlist.page = 1
+        vlist.setData(data)
+        vlist.load()
+                
+
 
 
 def create(engines):
@@ -86,20 +92,20 @@ def create(engines):
         
 
         ytList = VideoList(frame)
-        ytList.set(logoUrl[0], engines[0])
+        ytList.set(logoUrl[0], links[0], engines[0])
         ytList.setPos(10, 80)
         
 
-        # fbList = VideoList(frame)
-        # fbList.set(logoUrl, urls, infos)
-        # fbList.setPos(10, 300)
-        # fbList.load()
+        biliList = VideoList(frame)
+        biliList.set(logoUrl[1], links[1], engines[1])
+        biliList.setPos(10, 300)
 
         # yhList = VideoList(frame)
         # yhList.set(logoUrl, urls, infos)
         # yhList.setPos(10, 520)
         # yhList.load()
-        search_btn.bind('<Button-1>', lambda e:search(engines, search_tb.get(), ytList))
+        search_btn.bind('<Button-1>', lambda e:search_All(engines, [ytList, biliList], search_tb.get()))
+        window.bind('<Return>', lambda e:search_All(engines, [ytList, biliList], search_tb.get()))
 
         window.mainloop()
 

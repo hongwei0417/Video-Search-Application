@@ -1,7 +1,6 @@
 import tkinter as tk
 import re
 import json
-import unid
 
 bgc = "#121212"
 

@@ -6,7 +6,7 @@ import webbrowser
 from PIL import ImageTk, Image
 from io import BytesIO
 from urllib.request import urlopen
-from View.Tools import openLocal, openOnline
+from Module.Tools import openLocal, openOnline
 
 _nonbmp = re.compile(r'[\U00010000-\U0010FFFF]')
 
@@ -89,19 +89,19 @@ class VideoList:
         self.fh = 200
         self.fw = 760
         self.fbgc = "#1C1C1C"
-        self.link = 'https://www.youtube.com'
         self.vList = []
         self.frame = tk.Frame(frame, bg=self.fbgc, width=self.fw, height=self.fh)
         self.logo = tk.Label(self.frame, bg=self.fbgc, borderwidth=0)
         self.up = tk.Button(self.frame, text="▲", font=30, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
         self.down = tk.Button(self.frame, text="▼", font=30, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
 
-    def set(self, logoUrl, engine):
+    def set(self, logoUrl, link, engine):
         logoImg = openLocal(logoUrl, 100, 60)
         self.logo.configure(image=logoImg)
         self.logo.image = logoImg
         self.up.bind('<Button-1>', lambda x: self.prePage(engine))
         self.down.bind('<Button-1>', lambda x: self.nextPage(engine))
+        self.link = link
     
     def setData(self, data):
         posX = 130

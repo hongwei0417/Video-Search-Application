@@ -11,7 +11,14 @@ def scroll(browser):
     # browser.switch_to.alert.accept()
     time.sleep(2)
 
-def newTab(browser, url):
+def switchTab(browser):
+    browser.find_element_by_tag_name('html').send_keys(Keys.CONTROL + Keys.TAB)
+
+def newTab(browser):
     # ActionChains(self.browser).key_down(Keys.CONTROL).send_keys('t').key_up(Keys.CONTROL).perform()
-    browser.execute_script("window.open(" + url + ");")
+    browser.execute_script("window.open();")
+    switchTab(browser)
+
+
+
 
