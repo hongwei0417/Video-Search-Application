@@ -10,6 +10,14 @@ from Module.Tools import openLocal, openOnline
 
 _nonbmp = re.compile(r'[\U00010000-\U0010FFFF]')
 
+emoji_pattern = re.compile(
+    u"(\ud83d[\ude00-\ude4f])|"  # emoticons
+    u"(\ud83c[\udf00-\uffff])|"  # symbols & pictographs (1 of 2)
+    u"(\ud83d[\u0000-\uddff])|"  # symbols & pictographs (2 of 2)
+    u"(\ud83d[\ude80-\udeff])|"  # transport & map symbols
+    u"(\ud83c[\udde0-\uddff])"  # flags (iOS)
+    "+", flags=re.UNICODE)
+
 def _surrogatepair(match):
     char = match.group()
     assert ord(char) > 0xffff
@@ -20,14 +28,6 @@ def _surrogatepair(match):
 
 def with_surrogates(text):
     return _nonbmp.sub(_surrogatepair, text)
-
-emoji_pattern = re.compile(
-    u"(\ud83d[\ude00-\ude4f])|"  # emoticons
-    u"(\ud83c[\udf00-\uffff])|"  # symbols & pictographs (1 of 2)
-    u"(\ud83d[\u0000-\uddff])|"  # symbols & pictographs (2 of 2)
-    u"(\ud83d[\ude80-\udeff])|"  # transport & map symbols
-    u"(\ud83c[\udde0-\uddff])"  # flags (iOS)
-    "+", flags=re.UNICODE)
 
 def remove_emoji(text):
     return emoji_pattern.sub(r'', text)
@@ -77,7 +77,7 @@ class Video:
         self.frame.place(x=self.x, y=self.y)
         self.video.place(x=0, y=10)
         self.title.place(x=0, y=120, width=self.w, height=35)
-        self.author.place(x=0, y=155, width=self.w)
+        self.author.place(x=0, y=160, width=self.w)
         self.views.place(x=0, y=175, width=self.w)
         
 

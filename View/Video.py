@@ -4,6 +4,8 @@ import  Module.Driver as Driver
 from Module.Youtube import Youtube
 from Module.Bili import Bili
 
+x = 0
+y = 0
 wh = 500
 ww = 800
 fh = 200
@@ -45,12 +47,14 @@ def search(engine, vlist, text):
         vlist.load()
                 
 
-
-
 def create(engines):
         window = tk.Tk()
         window.title('Video Search')
-        window.geometry(str(ww) + 'x' + str(wh))
+        ws = window.winfo_screenwidth() # width of the screen
+        hs = window.winfo_screenheight() # height of the screen
+        x = (ws/2) - (ww/2)
+        y = (hs/2) - (wh/2)
+        window.geometry('%dx%d+%d+%d' % (ww, wh, x, y))
         window.resizable(False, False)
         window.configure(background=bgc)
 

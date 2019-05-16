@@ -9,6 +9,7 @@ class Youtube:
         self.browser = browser
 
     def search(self, keyword):
+        Driver.switchTab(self.browser, 0)
         url = self.url + keyword
         self.browser.get(url)
         self.updateSoup()
@@ -79,8 +80,9 @@ class Youtube:
         return src_list
 
     def getMore(self, pages=1):
+        Driver.switchTab(self.browser, 0)
         for i in range(pages):
-            Driver.scroll(self.browser)
+            Driver.scrollToButtom(self.browser)
         self.updateSoup()
         data = self.getData()
             
