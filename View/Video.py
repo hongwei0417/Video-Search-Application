@@ -1,19 +1,18 @@
 import tkinter as tk
 from View.VideoObj import Video, VideoList
+import View.Collection as Collection
 import  Module.Driver as Driver
 from Module.Youtube import Youtube
 from Module.Bili import Bili
 
 x = 0
 y = 0
-wh = 500
-ww = 800
-fh = 200
-fw = 760
+wh = 700
+ww = 1480
 bgc = "#121212"
 top_bgc = "#272727"
 fbgc = "#1C1C1C"
-links = ['https://www.youtube.com', '']
+links = ['https://www.youtube.com', 'https:']
 logoUrl = ['./Asset/youtube.png', './Asset/bili.jpg']
 
 def onFrameConfigure(canvas):
@@ -36,7 +35,7 @@ def search(engine, vlist, text):
         engine.search(text.strip())
         data = engine.getData()
         count = len(data['imgs'])
-        while(count < 4):
+        while(count < 16):
                 data = engine.getMore()
                 if(count == len(data['imgs'])): # 沒取得新資料
                         break
@@ -93,22 +92,30 @@ def create(engines):
                                 highlightthickness=0,
                                 )
         search_btn.place(x=580, y=17, height=30, width=50)
-        
+
+        collec_btn = tk.Button(top_frame, 
+                                text="喜愛", 
+                                fg='#373737', 
+                                highlightbackground='#d8d8d8', 
+                                highlightthickness=0,
+                                )
+        collec_btn.place(x=1000, y=17, height=30, width=50)
 
         ytList = VideoList(frame)
         ytList.set(logoUrl[0], links[0], engines[0])
-        ytList.setPos(10, 80)
+        ytList.setPos(30, 80)
         
 
         biliList = VideoList(frame)
         biliList.set(logoUrl[1], links[1], engines[1])
-        biliList.setPos(10, 300)
+        biliList.setPos(30, 500)
 
         # yhList = VideoList(frame)
         # yhList.set(logoUrl, urls, infos)
         # yhList.setPos(10, 520)
         # yhList.load()
-        search_btn.bind('<Button-1>', lambda e:search_All(engines, [ytList, biliList], search_tb.get()))
+        search_btn.bind('<Button-1>', lambda e: search_All(engines, [ytList, biliList], search_tb.get()))
+        collec_btn.bind('<Button-1>', lambda e: Collection.create())
         window.bind('<Return>', lambda e:search_All(engines, [ytList, biliList], search_tb.get()))
 
         window.mainloop()

@@ -20,12 +20,6 @@ class Youtube:
 
     def getData(self):
         data = {}
-        # data['imgs'] = self.getImgs()
-        # data['titles'] = self.getTitles()
-        # data['authors'] = self.getAuthors()
-        # data['views'] = self.getViews()
-        # data['hrefs']= self.getLinks()
-
         data['imgs'] = []
         data['titles'] = []
         data['authors'] = []
@@ -54,32 +48,7 @@ class Youtube:
 
         return data
 
-    def getImgs(self):
-        img_obj = self.soup.select('#contents ytd-video-renderer #img[src]')
-        img_list = list(map(lambda item: item['src'], img_obj))
-        return img_list
-
-    def getTitles(self):
-        title_obj = self.soup.select("#contents ytd-video-renderer #video-title[title]")
-        title_list = list(map(lambda item: item['title'], title_obj))
-        return title_list
-
-    def getAuthors(self):
-        author_obj = self.soup.select("#contents ytd-video-renderer #byline[title]")
-        author_list = list(map(lambda item: item['title'], author_obj))
-        return author_list
-
-    def getViews(self):
-        view_obj = self.soup.select("#contents ytd-video-renderer #metadata-line span:first-child")
-        view_list = list(map(lambda item: item.text.strip(), view_obj))
-        return view_list
-
-    def getLinks(self):
-        src_obj = self.soup.select('#contents ytd-video-renderer #thumbnail')
-        src_list = list(map(lambda item: item['href'], src_obj))
-        return src_list
-
-    def getMore(self, pages=1):
+    def getMore(self, pages=2):
         Driver.switchTab(self.browser, 0)
         for i in range(pages):
             Driver.scrollToButtom(self.browser)

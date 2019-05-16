@@ -7,26 +7,33 @@ class Bili:
     def __init__(self, browser):
         self.url = 'https://search.bilibili.com/all?keyword='
         self.browser = browser
+        self.page = 1
+        self.data = {
+            "imgs": [],
+            "titles": [],
+            "authors": [],
+            "views": [],
+            "hrefs": []
+        }
         Driver.newTab(self.browser)
 
     def search(self, keyword):
         Driver.switchTab(self.browser, 1)
+        self.keyword = keyword
         url = self.url + keyword
         self.browser.get(url)
         Driver.scrollLazy(self.browser, 5, 0.5)
         self.updateSoup()
+        self.appendData()
 
     def updateSoup(self):
         source = self.browser.page_source
         self.soup = BeautifulSoup(source, 'html.parser')
-
+          
     def getData(self):
-        data = {}
-        data['imgs'] = []
-        data['titles'] = []
-        data['authors'] = []
-        data['views'] = []
-        data['hrefs'] = []
+        return self.data
+
+    def appendData(self):
         video_obj = self.soup.select('.video-contain .video')
 
         for video in video_obj:
@@ -38,27 +45,28 @@ class Bili:
                 author = video.select('.info .tags .up-name')[0].text
                 view = video.select('.info .tags .watch-num')[0].text.strip()
                 print(view)
-                href = "https:" + video.select('.img-anchor')[0]['href']
-                data['imgs'].append(img)
-                data['titles'].append(title)
-                data['authors'].append(author)
-                data['views'].append(view)
-                data['hrefs'].append(href)
+                href = video.select('.img-anchor')[0]['href']
+                self.data['imgs'].append(img)
+                self.data['titles'].append(title)
+                self.data['authors'].append(author)
+                self.data['views'].append(view)
+                self.data['hrefs'].append(href)
             else:
                 continue # 沒有圖片就放棄取下一個影片
         
-        print(len(data['imgs']), len(data['hrefs']), len(data['titles']),len(data['authors']),len(data['views']))
+        print(len(self.data['imgs']), len(self.data['hrefs']), len(self.data['titles']),len(self.data['authors']),len(self.data['views']))
 
-        return data
 
-    def getMore(self, pages=1):
+    def getMore(self):
         Driver.switchTab(self.browser, 1)
-        for i in range(pages):
-            Driver.scrollLazy(self.browser, 5, 0.5)
+        url = self.url + self.keyword + "&page=" + str(self.page)
+        self.browser.get(url)
+        Driver.scrollLazy(self.browser, 4, 0.5)
         self.updateSoup()
-        data = self.getData()
+        self.appendData()
+        self.page += 1
             
-        return data
+        return self.data
 
 
 

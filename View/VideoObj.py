@@ -1,36 +1,11 @@
 import tkinter as tk
-import re
 import math
 import requests
 import webbrowser
 from PIL import ImageTk, Image
 from io import BytesIO
 from urllib.request import urlopen
-from Module.Tools import openLocal, openOnline
-
-_nonbmp = re.compile(r'[\U00010000-\U0010FFFF]')
-
-emoji_pattern = re.compile(
-    u"(\ud83d[\ude00-\ude4f])|"  # emoticons
-    u"(\ud83c[\udf00-\uffff])|"  # symbols & pictographs (1 of 2)
-    u"(\ud83d[\u0000-\uddff])|"  # symbols & pictographs (2 of 2)
-    u"(\ud83d[\ude80-\udeff])|"  # transport & map symbols
-    u"(\ud83c[\udde0-\uddff])"  # flags (iOS)
-    "+", flags=re.UNICODE)
-
-def _surrogatepair(match):
-    char = match.group()
-    assert ord(char) > 0xffff
-    encoded = char.encode('utf-16-le')
-    return (
-        chr(int.from_bytes(encoded[:2], 'little')) + 
-        chr(int.from_bytes(encoded[2:], 'little')))
-
-def with_surrogates(text):
-    return _nonbmp.sub(_surrogatepair, text)
-
-def remove_emoji(text):
-    return emoji_pattern.sub(r'', text)
+from Module.Tools import openLocal, openOnline, with_surrogates, remove_emoji
 
 class Video:
     
@@ -86,14 +61,15 @@ class VideoList:
     
     def __init__(self, frame):
         self.page = 1
-        self.fh = 200
-        self.fw = 760
+        self.pageCount = 16 # 一頁要顯示的數目
+        self.fh = 400
+        self.fw = 1400
         self.fbgc = "#1C1C1C"
         self.vList = []
         self.frame = tk.Frame(frame, bg=self.fbgc, width=self.fw, height=self.fh)
         self.logo = tk.Label(self.frame, bg=self.fbgc, borderwidth=0)
-        self.up = tk.Button(self.frame, text="▲", font=30, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
-        self.down = tk.Button(self.frame, text="▼", font=30, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
+        self.up = tk.Button(self.frame, text="▲", font=50, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
+        self.down = tk.Button(self.frame, text="▼", font=50, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
 
     def set(self, logoUrl, link, engine):
         logoImg = openLocal(logoUrl, 100, 60)
@@ -104,23 +80,37 @@ class VideoList:
         self.link = link
     
     def setData(self, data):
-        posX = 130
+        posX = 140
         count = len(data['imgs'])
         display = self.checkToDisplay(count)
 
         if(display == 0): return
         self.clear()
         i = 0
-        for n in range((self.page-1)*4, ((self.page-1)*4+display)):
-            self.vList.append(Video(self.frame))
-            video = self.vList[i]
-            video.setImg(data['imgs'][n])
-            video.setInfo(data['titles'][n], data['authors'][n], data['views'][n])
-            video.setLink(self.link + data['hrefs'][n])
-            video.setPos(posX, 0)
-            video.locate()
-            posX += 150
-            i += 1
+        for n in range((self.page-1)*self.pageCount, ((self.page-1)*self.pageCount + display)):
+            if(i < self.pageCount / 2):
+                self.vList.append(Video(self.frame))
+                video = self.vList[i]
+                video.setImg(data['imgs'][n])
+                video.setInfo(data['titles'][n], data['authors'][n], data['views'][n])
+                video.setLink(self.link + data['hrefs'][n])
+                video.setPos(posX, 0)
+                video.locate()
+                posX += 150
+                i += 1
+                if(i == self.pageCount / 2): posX = 140 # 第一行最後一個
+            else: # 八個以後顯示在第二行
+                self.vList.append(Video(self.frame))
+                video = self.vList[i]
+                video.setImg(data['imgs'][n])
+                video.setInfo(data['titles'][n], data['authors'][n], data['views'][n])
+                video.setLink(self.link + data['hrefs'][n])
+                video.setPos(posX, 200)
+                video.locate()
+                posX += 150
+                i += 1
+                if(i == self.pageCount): posX = 140
+
     
     def prePage(self, engine):
         if self.page > 1:
@@ -132,21 +122,20 @@ class VideoList:
         self.page += 1
         data = engine.getData()
         count = len(data['imgs'])
-        if(count < self.page * 4):
+        if(count < self.page * self.pageCount):
             data = engine.getMore()
             count = len(data['imgs'])
         self.setData(data)
 
     def checkToDisplay(self, count):
-        n = 4
-        display = 4
-        needPages = math.ceil(count / n)
+        display = self.pageCount
+        needPages = math.ceil(count / self.pageCount)
         if(self.page > needPages): # 頁面超過顯示範圍
             self.page = needPages
             display = 0
         else:
-            if(self.page == needPages and count % n != 0):
-                display = count % n
+            if(self.page == needPages and count % self.pageCount != 0):
+                display = count % self.pageCount
         
         print(self.page, needPages, count, display)
         return display
@@ -164,8 +153,8 @@ class VideoList:
 
     def load(self):
         self.frame.place(x=self.x, y=self.y)
-        self.logo.place(x=10, y=20)
-        self.up.place(x=727, y=40, height=25, width=25)
-        self.down.place(x=727, y=140, height=25, width=25)
+        self.logo.place(x=20, y=20)
+        self.up.place(x=1350, y=50, height=40, width=40)
+        self.down.place(x=1350, y=350, height=40, width=40)
         for n in range(len(self.vList)):
             self.vList[n].locate()
