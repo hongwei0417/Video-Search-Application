@@ -6,6 +6,7 @@ from PIL import ImageTk, Image
 from io import BytesIO
 from urllib.request import urlopen
 from Module.Tools import openLocal, openOnline, with_surrogates, remove_emoji
+import View.Collection as Collection
 
 class Video:
     
@@ -24,8 +25,14 @@ class Video:
         self.video.config(image = self.video_img)
     
     def setLink(self, href):
-        self.video.bind('<Button-1>', lambda x: webbrowser.open(href))
-        
+        self.video.bind('<Button-1>', lambda e: webbrowser.open(href))
+    
+    def setCollection(self, img, title, author, view, description):
+        self.video.bind('<Button-3>', lambda e: self.addCollection(img, title, author, view, description))
+
+    def addCollection(self, img, title, author, view, description):
+        Collection.create(img, title, author, view, description)
+            
     def setInfo(self, title, author, view):
         try:
             self.title.config(text=title)
@@ -94,6 +101,7 @@ class VideoList:
                 video.setImg(data['imgs'][n])
                 video.setInfo(data['titles'][n], data['authors'][n], data['views'][n])
                 video.setLink(self.link + data['hrefs'][n])
+                video.setCollection(data['imgs'][n], data['titles'][n], data['authors'][n], data['views'][n], data['descriptions'])
                 video.setPos(posX, 0)
                 video.locate()
                 posX += 150
@@ -105,6 +113,7 @@ class VideoList:
                 video.setImg(data['imgs'][n])
                 video.setInfo(data['titles'][n], data['authors'][n], data['views'][n])
                 video.setLink(self.link + data['hrefs'][n])
+                video.setCollection(data['imgs'][n], data['titles'][n], data['authors'][n], data['views'][n], data['descriptions'])
                 video.setPos(posX, 200)
                 video.locate()
                 posX += 150

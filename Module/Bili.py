@@ -13,7 +13,8 @@ class Bili:
             "titles": [],
             "authors": [],
             "views": [],
-            "hrefs": []
+            "hrefs": [],
+            "descriptions": []
         }
         Driver.newTab(self.browser)
 
@@ -44,6 +45,7 @@ class Bili:
                 title = video.select('.info .title')[0]['title']
                 author = video.select('.info .tags .up-name')[0].text
                 view = video.select('.info .tags .watch-num')[0].text.strip()
+                description = video.select('.info .des')[0].text.strip()
                 print(view)
                 href = video.select('.img-anchor')[0]['href']
                 self.data['imgs'].append(img)
@@ -51,10 +53,11 @@ class Bili:
                 self.data['authors'].append(author)
                 self.data['views'].append(view)
                 self.data['hrefs'].append(href)
+                self.data['descriptions'].append(description)
             else:
                 continue # 沒有圖片就放棄取下一個影片
         
-        print(len(self.data['imgs']), len(self.data['hrefs']), len(self.data['titles']),len(self.data['authors']),len(self.data['views']))
+        print(len(self.data['imgs']), len(self.data['hrefs']), len(self.data['titles']),len(self.data['authors']),len(self.data['views']), len(self.data['descriptions']))
 
 
     def getMore(self):

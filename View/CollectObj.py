@@ -11,12 +11,16 @@ class VideoItem:
         self.frame = tk.Frame(frame, bg=self.fbgc, width=self.w, height=self.h)
         self.del_btn = tk.Button(self.frame,  text="刪除", fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
         self.video = tk.Button(self.frame, borderwidth=0, highlightbackground=self.fbgc, relief="groove", highlightthickness=0)
+        self.logo = tk.Label(self.frame, bg=self.fbgc, borderwidth=0)
         self.title = tk.Label(self.frame, wraplength=400, bg=self.fbgc, fg="white", font=('Arial', 15), anchor="nw", justify = 'left')
         self.author = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 10))
         self.views = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 10))
         self.intro = tk.Label(self.frame, wraplength=250, bg=self.fbgc, fg="white", font=('Arial', 10), anchor="nw", justify = 'left')
 
-    def setImg(self, url):
+    def setImg(self, url, logoUrl):
+        logoImg = openLocal(logoUrl, 50, 30)
+        self.logo.configure(image=logoImg)
+        self.logo.image = logoImg
         self.video_img = openOnline(url, 250, self.h)
         self.video.config(image = self.video_img)
         self.video.img = self.video_img
@@ -27,7 +31,6 @@ class VideoItem:
             self.author.config(text=author)
             self.views.config(text=view)
             self.intro.config(text=intro)
-
         except:
             t = with_surrogates(title)
             self.title.config(text=remove_emoji(t))
@@ -43,6 +46,7 @@ class VideoItem:
         self.frame.place(x=self.x, y=self.y)
         self.del_btn.place(x=700, y=0, height=150, width=50)
         self.video.place(x=0, y=0)
+        self.logo.place(x=200, y=120)
         self.title.place(x=270, y=10, height=80)
         self.author.place(x=270, y=100)
         self.views.place(x=270, y=120)
