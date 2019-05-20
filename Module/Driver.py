@@ -9,7 +9,7 @@ def setWindow(browser, x, y):
 def scrollToButtom(browser):
     elm = browser.find_element_by_tag_name('html')
     elm.send_keys(Keys.END)
-    time.sleep(1)
+    time.sleep(2)
 
 def scrollLazy(browser, times, wait):
     maxH = browser.execute_script("return document.body.scrollHeight")

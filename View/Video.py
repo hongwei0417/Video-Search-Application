@@ -1,9 +1,11 @@
 import tkinter as tk
+import tkinter.messagebox as messagebox
 from View.VideoObj import Video, VideoList
 import View.Collection as Collection
 import  Module.Driver as Driver
 from Module.Youtube import Youtube
 from Module.Bili import Bili
+from Module.Tools import loading
 
 x = 0
 y = 0
@@ -32,6 +34,7 @@ def search_All(engines, vlists, text):
                 print('搜尋字串空白')
 
 def search(engine, vlist, text):
+        loading()
         engine.search(text.strip())
         data = engine.getData()
         count = len(data['imgs'])
@@ -115,7 +118,7 @@ def create(engines):
         # yhList.setPos(10, 520)
         # yhList.load()
         search_btn.bind('<Button-1>', lambda e: search_All(engines, [ytList, biliList], search_tb.get()))
-        collec_btn.bind('<Button-1>', lambda e: Collection.create())
+        # collec_btn.bind('<Button-1>', lambda e: Collection.create())
         window.bind('<Return>', lambda e:search_All(engines, [ytList, biliList], search_tb.get()))
 
         window.mainloop()

@@ -23,16 +23,28 @@ class Bili:
         self.keyword = keyword
         url = self.url + keyword
         self.browser.get(url)
-        Driver.scrollLazy(self.browser, 5, 0.5)
+        time.sleep(1)
+        Driver.scrollLazy(self.browser, 4, 2)
         self.updateSoup()
+        self.clearData()
         self.appendData()
 
     def updateSoup(self):
         source = self.browser.page_source
         self.soup = BeautifulSoup(source, 'html.parser')
-          
+        
     def getData(self):
         return self.data
+
+    def clearData(self):
+        self.data = {
+            "imgs": [],
+            "titles": [],
+            "authors": [],
+            "views": [],
+            "hrefs": [],
+            "descriptions": []
+        }
 
     def appendData(self):
         video_obj = self.soup.select('.video-contain .video')
@@ -46,7 +58,7 @@ class Bili:
                 author = video.select('.info .tags .up-name')[0].text
                 view = video.select('.info .tags .watch-num')[0].text.strip()
                 description = video.select('.info .des')[0].text.strip()
-                print(view)
+                print(img)
                 href = video.select('.img-anchor')[0]['href']
                 self.data['imgs'].append(img)
                 self.data['titles'].append(title)
@@ -64,7 +76,8 @@ class Bili:
         Driver.switchTab(self.browser, 1)
         url = self.url + self.keyword + "&page=" + str(self.page)
         self.browser.get(url)
-        Driver.scrollLazy(self.browser, 4, 0.5)
+        time.sleep(1)
+        Driver.scrollLazy(self.browser, 4, 2)
         self.updateSoup()
         self.appendData()
         self.page += 1

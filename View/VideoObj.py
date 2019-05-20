@@ -28,7 +28,7 @@ class Video:
         self.video.bind('<Button-1>', lambda e: webbrowser.open(href))
     
     def setCollection(self, img, title, author, view, description):
-        self.video.bind('<Button-3>', lambda e: self.addCollection(img, title, author, view, description))
+        self.video.bind('<Double-Button-1>', lambda e: self.addCollection(img, title, author, view, description))
 
     def addCollection(self, img, title, author, view, description):
         Collection.create(img, title, author, view, description)
@@ -61,7 +61,6 @@ class Video:
         self.title.place(x=0, y=120, width=self.w, height=35)
         self.author.place(x=0, y=160, width=self.w)
         self.views.place(x=0, y=175, width=self.w)
-        
 
 
 class VideoList:
@@ -107,7 +106,7 @@ class VideoList:
                 posX += 150
                 i += 1
                 if(i == self.pageCount / 2): posX = 140 # 第一行最後一個
-            else: # 八個以後顯示在第二行
+            else: # 顯示在第二行
                 self.vList.append(Video(self.frame))
                 video = self.vList[i]
                 video.setImg(data['imgs'][n])
@@ -131,9 +130,12 @@ class VideoList:
         self.page += 1
         data = engine.getData()
         count = len(data['imgs'])
-        if(count < self.page * self.pageCount):
+        while(count < self.page * self.pageCount):
             data = engine.getMore()
-            count = len(data['imgs'])
+            if(count == len(data['imgs'])): # 沒取得新資料
+                break
+            else:
+                count = len(data['imgs']) # 有取的新資料
         self.setData(data)
 
     def checkToDisplay(self, count):
