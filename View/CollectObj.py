@@ -1,5 +1,7 @@
 import tkinter as tk
 from Module.Tools import openLocal, openOnline, with_surrogates, remove_emoji
+import Module.DB as Db
+import webbrowser
 
 class VideoItem:
 
@@ -16,6 +18,19 @@ class VideoItem:
         self.author = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 10))
         self.views = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 10))
         self.intro = tk.Label(self.frame, wraplength=250, bg=self.fbgc, fg="white", font=('Arial', 10), anchor="nw", justify = 'left')
+
+    def setLink(self, href):
+        self.video.bind('<Button-1>', lambda e: webbrowser.open(href))
+    
+    def setDelete(self, uid, link, load):
+        self.del_btn.bind('<Button-1>', lambda e: self.delete(uid, link, load))
+
+    def delete(self, uid, link, load):
+        try:
+            Db.delCollection(uid, link)
+            self.frame.destroy()
+        except:
+            print("刪除最愛失敗!")
 
     def setImg(self, url, logoUrl):
         logoImg = openLocal(logoUrl, 50, 30)

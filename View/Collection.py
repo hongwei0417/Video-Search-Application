@@ -1,5 +1,6 @@
 import tkinter as tk
 from View.CollectObj import VideoItem
+import Module.DB as Db
 
 
 wh = 500
@@ -13,7 +14,28 @@ def onFrameConfigure(canvas):
         '''Reset the scroll region to encompass the inner frame'''
         canvas.configure(scrollregion=canvas.bbox("all"))
 
-def create(img, title, author, view, description):
+def loadVideo(user, frame):
+        dataList = Db.getCollection(user[0])
+        itemList = []
+        y = 20
+
+        for data in dataList:
+                logoIndex = 0
+                if data['type'] == 'youtube': logoIndex = 0
+                elif data['type'] == 'bilibili': logoIndex = 1
+                item = VideoItem(frame)
+                item.setImg(data['img'], logoUrl[logoIndex])
+                item.setLink(data['link'])
+                item.setDelete(user[0], data['link'], loadVideo)
+                item.setInfo(data['title'], data['author'], data['view'], data['description'])
+                item.setPos(20, y)
+                itemList.append(item)
+                y += 170
+        
+        for item in itemList:
+                item.load()
+
+def create(user):
         window = tk.Toplevel()
         window.title('My Collections')
         ws = window.winfo_screenwidth() # width of the screen
@@ -34,23 +56,18 @@ def create(img, title, author, view, description):
         canvas.create_window(0,0, window=frame, anchor="nw")
 
         frame.bind("<Configure>", lambda event,_canvas=canvas: onFrameConfigure(_canvas))
-
         
-        item1 = VideoItem(frame)
-        item1.setImg(img, logoUrl[0])
-        item1.setInfo(title, author, view, description)
-        item1.setPos(20, 20)
-        item1.load()
+        loadVideo(user, frame)
 
-        item2 = VideoItem(frame)
-        item2.setImg('https://i.ytimg.com/vi/wKpB5sn17T0/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCUOz12pkNeaPFOt4T_mep2W4IJ7g', logoUrl[1])
-        item2.setInfo('我是 - 一個小哈哈哈哈希希拉，真的嘿嘿!', 'EHPMusicChannel', '觀看次數：8,851,509次', '木棉花Youtube頻道動畫線上免費看訂閱木棉花以獲得最新訊息http://bit.ly/Muse-TW_YTChannel J市海邊有一群自稱是深海族的怪人 ...')
-        item2.setPos(20, 190)
-        item2.load()
+        # item2 = VideoItem(frame)
+        # item2.setImg('https://i.ytimg.com/vi/wKpB5sn17T0/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCUOz12pkNeaPFOt4T_mep2W4IJ7g', logoUrl[1])
+        # item2.setInfo('我是 - 一個小哈哈哈哈希希拉，真的嘿嘿!', 'EHPMusicChannel', '觀看次數：8,851,509次', '木棉花Youtube頻道動畫線上免費看訂閱木棉花以獲得最新訊息http://bit.ly/Muse-TW_YTChannel J市海邊有一群自稱是深海族的怪人 ...')
+        # item2.setPos(20, 190)
+        # item2.load()
 
-        item3 = VideoItem(frame)
-        item3.setImg('https://i.ytimg.com/vi/wKpB5sn17T0/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCUOz12pkNeaPFOt4T_mep2W4IJ7g', logoUrl[0])
-        item3.setInfo('季彥霖 - 多想愛你『也許命中註定，他比我適合你。』【動態歌詞Lyrics】', 'EHPMusicChannel', '觀看次數：8,851,509次', '木棉花Youtube頻道動畫線上免費看訂閱木棉花以獲得最新訊息http://bit.ly/Muse-TW_YTChannel J市海邊有一群自稱是深海族的怪人 ...')
-        item3.setPos(20, 360)
-        item3.load()
+        # item3 = VideoItem(frame)
+        # item3.setImg('https://i.ytimg.com/vi/wKpB5sn17T0/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCUOz12pkNeaPFOt4T_mep2W4IJ7g', logoUrl[0])
+        # item3.setInfo('季彥霖 - 多想愛你『也許命中註定，他比我適合你。』【動態歌詞Lyrics】', 'EHPMusicChannel', '觀看次數：8,851,509次', '木棉花Youtube頻道動畫線上免費看訂閱木棉花以獲得最新訊息http://bit.ly/Muse-TW_YTChannel J市海邊有一群自稱是深海族的怪人 ...')
+        # item3.setPos(20, 360)
+        # item3.load()
 

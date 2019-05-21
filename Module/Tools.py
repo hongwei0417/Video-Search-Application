@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Message
+from tkinter import messagebox
 import requests
 import re
 from PIL import ImageTk, Image
@@ -46,11 +46,8 @@ def with_surrogates(text):
 def remove_emoji(text):
     return emoji_pattern.sub(r'', text)
 
-def loading():
-    top = tk.Toplevel()
-    top.title('Welcome')
-    Message(top, text='WELCOME_MSG', padx=20, pady=20).pack()
-    top.after(5, top.destroy)
+def show():
+    messagebox.showinfo("蒐藏", "影片已加入蒐藏")
 
 
 

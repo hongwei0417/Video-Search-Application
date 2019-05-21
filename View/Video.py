@@ -5,12 +5,12 @@ import View.Collection as Collection
 import  Module.Driver as Driver
 from Module.Youtube import Youtube
 from Module.Bili import Bili
-from Module.Tools import loading
+import Module.DB as Db
 
 x = 0
 y = 0
 wh = 700
-ww = 1480
+ww = 1180
 bgc = "#121212"
 top_bgc = "#272727"
 fbgc = "#1C1C1C"
@@ -21,10 +21,10 @@ def onFrameConfigure(canvas):
         '''Reset the scroll region to encompass the inner frame'''
         canvas.configure(scrollregion=canvas.bbox("all"))
 
-def init(browser):
+def init(user, browser):
         yt = Youtube(browser)
         bili = Bili(browser)
-        create([yt, bili])
+        create(user, [yt, bili])
 
 def search_All(engines, vlists, text):
         if(not(text.strip() == '')):
@@ -34,11 +34,10 @@ def search_All(engines, vlists, text):
                 print('搜尋字串空白')
 
 def search(engine, vlist, text):
-        loading()
         engine.search(text.strip())
         data = engine.getData()
         count = len(data['imgs'])
-        while(count < 16):
+        while(count < 12):
                 data = engine.getMore()
                 if(count == len(data['imgs'])): # 沒取得新資料
                         break
@@ -47,9 +46,13 @@ def search(engine, vlist, text):
         vlist.page = 1
         vlist.setData(data)
         vlist.load()
+
+def openCollection(user):
+        Collection.create(user)
+        
                 
 
-def create(engines):
+def create(user, engines):
         window = tk.Tk()
         window.title('Video Search')
         ws = window.winfo_screenwidth() # width of the screen
@@ -105,12 +108,12 @@ def create(engines):
         collec_btn.place(x=1000, y=17, height=30, width=50)
 
         ytList = VideoList(frame)
-        ytList.set(logoUrl[0], links[0], engines[0])
+        ytList.set(user, "youtube", logoUrl[0], links[0], engines[0])
         ytList.setPos(30, 80)
         
 
         biliList = VideoList(frame)
-        biliList.set(logoUrl[1], links[1], engines[1])
+        biliList.set(user, "bilibili", logoUrl[1], links[1], engines[1])
         biliList.setPos(30, 500)
 
         # yhList = VideoList(frame)
@@ -118,7 +121,7 @@ def create(engines):
         # yhList.setPos(10, 520)
         # yhList.load()
         search_btn.bind('<Button-1>', lambda e: search_All(engines, [ytList, biliList], search_tb.get()))
-        # collec_btn.bind('<Button-1>', lambda e: Collection.create())
+        collec_btn.bind('<Button-1>', lambda e: openCollection(user))
         window.bind('<Return>', lambda e:search_All(engines, [ytList, biliList], search_tb.get()))
 
         window.mainloop()

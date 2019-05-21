@@ -1,12 +1,14 @@
 import tkinter as tk
+from tkinter import messagebox
 import math
 import requests
 import webbrowser
 from PIL import ImageTk, Image
 from io import BytesIO
 from urllib.request import urlopen
-from Module.Tools import openLocal, openOnline, with_surrogates, remove_emoji
+from Module.Tools import openLocal, openOnline, with_surrogates, remove_emoji, show
 import View.Collection as Collection
+import Module.DB as Db
 
 class Video:
     
@@ -27,11 +29,18 @@ class Video:
     def setLink(self, href):
         self.video.bind('<Button-1>', lambda e: webbrowser.open(href))
     
-    def setCollection(self, img, title, author, view, description):
-        self.video.bind('<Double-Button-1>', lambda e: self.addCollection(img, title, author, view, description))
+    def setCollection(self, user, ty, img, title, author, view, description, link):
+        self.video.bind('<Button-3>', lambda e: self.addCollection(user, ty, img, title, author, view, description, link))
 
-    def addCollection(self, img, title, author, view, description):
-        Collection.create(img, title, author, view, description)
+    def addCollection(self, user, ty, img, title, author, view, description, link):
+        # try:
+        result = Db.addCollection(user[0], ty, img, title, author, view, description, link)
+        if(result):  
+            messagebox.showinfo("蒐藏提醒", "影片已加入蒐藏!")
+        else:
+            messagebox.showinfo("蒐藏提醒", "這影片加入過囉!")
+        # except:
+        #     print("加入蒐藏失敗!")
             
     def setInfo(self, title, author, view):
         try:
@@ -67,9 +76,9 @@ class VideoList:
     
     def __init__(self, frame):
         self.page = 1
-        self.pageCount = 16 # 一頁要顯示的數目
+        self.pageCount = 12 # 一頁要顯示的數目
         self.fh = 400
-        self.fw = 1400
+        self.fw = 1100
         self.fbgc = "#1C1C1C"
         self.vList = []
         self.frame = tk.Frame(frame, bg=self.fbgc, width=self.fw, height=self.fh)
@@ -77,8 +86,10 @@ class VideoList:
         self.up = tk.Button(self.frame, text="▲", font=50, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
         self.down = tk.Button(self.frame, text="▼", font=50, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
 
-    def set(self, logoUrl, link, engine):
+    def set(self, user, ty, logoUrl, link, engine):
         logoImg = openLocal(logoUrl, 100, 60)
+        self.user = user
+        self.type = ty
         self.logo.configure(image=logoImg)
         self.logo.image = logoImg
         self.up.bind('<Button-1>', lambda x: self.prePage(engine))
@@ -94,13 +105,14 @@ class VideoList:
         self.clear()
         i = 0
         for n in range((self.page-1)*self.pageCount, ((self.page-1)*self.pageCount + display)):
+            link = self.link + data['hrefs'][n]
             if(i < self.pageCount / 2):
                 self.vList.append(Video(self.frame))
                 video = self.vList[i]
                 video.setImg(data['imgs'][n])
                 video.setInfo(data['titles'][n], data['authors'][n], data['views'][n])
-                video.setLink(self.link + data['hrefs'][n])
-                video.setCollection(data['imgs'][n], data['titles'][n], data['authors'][n], data['views'][n], data['descriptions'])
+                video.setLink(link)
+                video.setCollection(self.user, self.type, data['imgs'][n], data['titles'][n], data['authors'][n], data['views'][n], data['descriptions'][n], link)
                 video.setPos(posX, 0)
                 video.locate()
                 posX += 150
@@ -112,7 +124,7 @@ class VideoList:
                 video.setImg(data['imgs'][n])
                 video.setInfo(data['titles'][n], data['authors'][n], data['views'][n])
                 video.setLink(self.link + data['hrefs'][n])
-                video.setCollection(data['imgs'][n], data['titles'][n], data['authors'][n], data['views'][n], data['descriptions'])
+                video.setCollection(self.user, self.type, data['imgs'][n], data['titles'][n], data['authors'][n], data['views'][n], data['descriptions'][n], link)
                 video.setPos(posX, 200)
                 video.locate()
                 posX += 150
@@ -165,7 +177,7 @@ class VideoList:
     def load(self):
         self.frame.place(x=self.x, y=self.y)
         self.logo.place(x=20, y=20)
-        self.up.place(x=1350, y=50, height=40, width=40)
-        self.down.place(x=1350, y=350, height=40, width=40)
+        self.up.place(x=self.fw-50, y=50, height=40, width=40)
+        self.down.place(x=self.fw-50, y=350, height=40, width=40)
         for n in range(len(self.vList)):
             self.vList[n].locate()
