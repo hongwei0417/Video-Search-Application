@@ -14,6 +14,12 @@ def onFrameConfigure(canvas):
         '''Reset the scroll region to encompass the inner frame'''
         canvas.configure(scrollregion=canvas.bbox("all"))
 
+def refresh(user, frame):
+        for item in frame.winfo_children():
+                item.destroy()
+
+        loadVideo(user, frame)
+
 def loadVideo(user, frame):
         dataList = Db.getCollection(user[0])
         itemList = []
@@ -26,14 +32,16 @@ def loadVideo(user, frame):
                 item = VideoItem(frame)
                 item.setImg(data['img'], logoUrl[logoIndex])
                 item.setLink(data['link'])
-                item.setDelete(user[0], data['link'], loadVideo)
+                item.setDelete(user, data['link'], frame, refresh)
                 item.setInfo(data['title'], data['author'], data['view'], data['description'])
                 item.setPos(20, y)
                 itemList.append(item)
                 y += 170
         
+        frame.config(height=y+20)
         for item in itemList:
                 item.load()
+
 
 def create(user):
         window = tk.Toplevel()
@@ -47,7 +55,7 @@ def create(user):
         window.configure(background=bgc)
 
         canvas = tk.Canvas(window, borderwidth=0, background=bgc, highlightthickness=0, relief='ridge')
-        frame = tk.Frame(canvas, background=bgc, width=ww, height=ww)
+        frame = tk.Frame(canvas, background=bgc, width=ww, height=wh)
         vsb = tk.Scrollbar(window, orient="vertical", command=canvas.yview)
         canvas.configure(yscrollcommand=vsb.set)
 

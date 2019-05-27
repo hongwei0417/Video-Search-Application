@@ -50,4 +50,17 @@ def show():
     messagebox.showinfo("蒐藏", "影片已加入蒐藏")
 
 
+def format_view(t):
+    result = ""
+    text = t.strip().strip(' ')
+    number = int(''.join(x for x in text if x.isdigit()))
+    if number >= 10000:
+        number = round(number / 10000, 1)
+        result = "觀看次數：{0}萬次".format(number)
+    else:
+        result = "觀看次數：{0}次".format(number)
+
+    return result
+
+
 

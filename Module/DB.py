@@ -61,15 +61,8 @@ def addCollection(uid, ty, img, title, author, view, des, link):
     cursor.execute("SELECT * FROM video WHERE link = '" + link + "'")
     video = cursor.fetchone()
     if(video == None):
-        cursor.execute("INSERT INTO video VALUES ('" + \
-                    uid + "','" + \
-                    ty + "','" + \
-                    img + "','" + \
-                    title + "','" + \
-                    author + "','" + \
-                    view + "','" + \
-                    des + "','" + \
-                    link + "')")
+        cursor.execute("INSERT INTO video VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                        (uid, ty, img, title, author, view, des, link))
         conn.commit()
         return True
     else:

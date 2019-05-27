@@ -30,7 +30,7 @@ class Video:
         self.video.bind('<Button-1>', lambda e: webbrowser.open(href))
     
     def setCollection(self, user, ty, img, title, author, view, description, link):
-        self.video.bind('<Button-3>', lambda e: self.addCollection(user, ty, img, title, author, view, description, link))
+        self.video.bind('<Button-2>', lambda e: self.addCollection(user, ty, img, title, author, view, description, link))
 
     def addCollection(self, user, ty, img, title, author, view, description, link):
         # try:

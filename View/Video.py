@@ -65,7 +65,7 @@ def create(user, engines):
 
 
         canvas = tk.Canvas(window, borderwidth=0, background=bgc, highlightthickness=0, relief='ridge')
-        frame = tk.Frame(canvas, background=bgc, width=ww, height=ww)
+        frame = tk.Frame(canvas, background=bgc, width=ww, height=1500)
         vsb = tk.Scrollbar(window, orient="vertical", command=canvas.yview)
         canvas.configure(yscrollcommand=vsb.set)
 

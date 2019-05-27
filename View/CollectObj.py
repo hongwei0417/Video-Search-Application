@@ -11,8 +11,8 @@ class VideoItem:
         self.fbgc = "#1C1C1C"
 
         self.frame = tk.Frame(frame, bg=self.fbgc, width=self.w, height=self.h)
-        self.del_btn = tk.Button(self.frame,  text="刪除", fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
-        self.video = tk.Button(self.frame, borderwidth=0, highlightbackground=self.fbgc, relief="groove", highlightthickness=0)
+        self.del_btn = tk.Button(self.frame, text="刪除", fg='#373737', bg='#777777', highlightbackground=self.fbgc, highlightthickness=0)
+        self.video = tk.Button(self.frame, borderwidth=0, highlightbackground=self.fbgc, relief="groove")
         self.logo = tk.Label(self.frame, bg=self.fbgc, borderwidth=0)
         self.title = tk.Label(self.frame, wraplength=400, bg=self.fbgc, fg="white", font=('Arial', 15), anchor="nw", justify = 'left')
         self.author = tk.Label(self.frame, bg=self.fbgc, fg='#aaaaaa', font=('Arial', 10))
@@ -21,16 +21,18 @@ class VideoItem:
 
     def setLink(self, href):
         self.video.bind('<Button-1>', lambda e: webbrowser.open(href))
-    
-    def setDelete(self, uid, link, load):
-        self.del_btn.bind('<Button-1>', lambda e: self.delete(uid, link, load))
 
-    def delete(self, uid, link, load):
+    def setDelete(self, user, link, frame, refresh):
+        self.del_btn.bind('<Button-1>', lambda e: self.delete(user, link, frame, refresh))
+
+    def delete(self, user, link, frame, refresh):
         try:
-            Db.delCollection(uid, link)
-            self.frame.destroy()
+            Db.delCollection(user[0], link)
+            # self.frame.destroy()
         except:
             print("刪除最愛失敗!")
+
+        refresh(user, frame)
 
     def setImg(self, url, logoUrl):
         logoImg = openLocal(logoUrl, 50, 30)
@@ -66,6 +68,7 @@ class VideoItem:
         self.author.place(x=270, y=100)
         self.views.place(x=270, y=120)
         self.intro.place(x=430, y=100, height=40)
+
 
 
 
