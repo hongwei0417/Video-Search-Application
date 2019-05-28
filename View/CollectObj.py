@@ -64,10 +64,10 @@ class VideoItem:
         self.del_btn.place(x=700, y=0, height=150, width=50)
         self.video.place(x=0, y=0)
         self.logo.place(x=200, y=120)
-        self.title.place(x=270, y=10, height=80)
+        self.title.place(x=270, y=10, height=50)
         self.author.place(x=270, y=100)
         self.views.place(x=270, y=120)
-        self.intro.place(x=430, y=100, height=40)
+        self.intro.place(x=430, y=80, height=60)
 
 
 

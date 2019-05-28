@@ -36,8 +36,56 @@ def newTab(browser):
     # ActionChains(self.browser).key_down(Keys.CONTROL).send_keys('t').key_up(Keys.CONTROL).perform()
     browser.execute_script("window.open();")
 
+
+def relevance(browser, type):
+    if type == 'youtube':
+        link = browser.find_element_by_css_selector("#container > ytd-toggle-button-renderer > a")
+        link.click()
+        link = browser.find_element_by_css_selector("#collapse-content > ytd-search-filter-group-renderer:nth-child(5) > ytd-search-filter-renderer:nth-child(2) a")
+        link.click()
+    elif type == 'bilibili':
+        link = browser.find_element_by_css_selector("div.filter-wrap > ul.filter-type.clearfix.order > li:nth-child(1) > a")
+        link.click()
     
+    time.sleep(1)
 
 
+def uploadDate(browser, type):
+    if type == 'youtube':
+        link = browser.find_element_by_css_selector("#container > ytd-toggle-button-renderer > a")
+        link.click()
+        link = browser.find_element_by_css_selector("#collapse-content > ytd-search-filter-group-renderer:nth-child(5) > ytd-search-filter-renderer:nth-child(4) a")
+        link.click()
+    elif type == 'bilibili':
+        link = browser.find_element_by_css_selector("div.filter-wrap > ul.filter-type.clearfix.order > li:nth-child(3) > a")
+        link.click()
+    
+    time.sleep(1)
+
+
+def viewCount(browser, type):
+    if type == 'youtube':
+        link = browser.find_element_by_css_selector("#container > ytd-toggle-button-renderer > a")
+        link.click()
+        link = browser.find_element_by_css_selector("#collapse-content > ytd-search-filter-group-renderer:nth-child(5) > ytd-search-filter-renderer:nth-child(6) a")
+        link.click()
+    elif type == 'bilibili':
+        link = browser.find_element_by_css_selector("div.filter-wrap > ul.filter-type.clearfix.order > li:nth-child(2) > a")
+        link.click()
+    
+    time.sleep(1)
+
+
+def score(browser, type):
+    if type == 'youtube':
+        link = browser.find_element_by_css_selector("#container > ytd-toggle-button-renderer > a")
+        link.click()
+        link = browser.find_element_by_css_selector("#collapse-content > ytd-search-filter-group-renderer:nth-child(5) > ytd-search-filter-renderer:nth-child(7) a")
+        link.click()
+    elif type == 'bilibili':
+        link = browser.find_element_by_css_selector("div.filter-wrap > ul.filter-type.clearfix.order > li:nth-child(4) > a")
+        link.click()
+    
+    time.sleep(1)
 
 

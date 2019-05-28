@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from Module.Tools import format_view
 import time
 import Module.Driver as Driver
 class Bili:
@@ -24,6 +25,7 @@ class Bili:
         url = self.url + keyword
         self.browser.get(url)
         time.sleep(1)
+        Driver.relevance(self.browser, 'bilibili')
         Driver.scrollLazy(self.browser, 4, 2)
         self.updateSoup()
         self.clearData()
@@ -63,7 +65,7 @@ class Bili:
                 self.data['imgs'].append(img)
                 self.data['titles'].append(title)
                 self.data['authors'].append(author)
-                self.data['views'].append(view)
+                self.data['views'].append(format_view(view))
                 self.data['hrefs'].append(href)
                 self.data['descriptions'].append(description)
             else:
@@ -77,7 +79,7 @@ class Bili:
         url = self.url + self.keyword + "&page=" + str(self.page)
         self.browser.get(url)
         time.sleep(1)
-        Driver.scrollLazy(self.browser, 4, 2)
+        Driver.scrollLazy(self.browser, 3, 2)
         self.updateSoup()
         self.appendData()
         self.page += 1

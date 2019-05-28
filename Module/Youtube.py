@@ -8,7 +8,7 @@ class Youtube:
         self.url = 'https://www.youtube.com/results?search_query='
         self.browser = browser
 
-    def search(self, keyword):
+    def search(self, keyword, filter):
         Driver.switchTab(self.browser, 0)
         url = self.url + keyword
         self.browser.get(url)
