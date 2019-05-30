@@ -152,7 +152,7 @@ def create(browser):
         rb1.bind("<Button-1>", lambda e: login(title, [id_lb, id_tb], [psd_lb, psd_tb], [name_lb, name_tb], login_btn))
         rb2.bind("<Button-1>", lambda e: register(title, [id_lb, id_tb], [psd_lb, psd_tb], [name_lb, name_tb], login_btn))
         login_btn.bind("<Button-1>", lambda e: commit(var, id_tb, psd_tb, name_tb, browser, window))
-
+        window.bind('<Return>', lambda e: commit(var, id_tb, psd_tb, name_tb, browser, window))
 
 
         window.mainloop()

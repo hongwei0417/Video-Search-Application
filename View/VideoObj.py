@@ -177,7 +177,7 @@ class VideoList:
     def load(self):
         self.frame.place(x=self.x, y=self.y)
         self.logo.place(x=20, y=20)
-        self.up.place(x=self.fw-50, y=50, height=40, width=40)
-        self.down.place(x=self.fw-50, y=350, height=40, width=40)
+        self.up.place(x=self.fw-50, y=30, height=40, width=40)
+        self.down.place(x=self.fw-50, y=330, height=40, width=40)
         for n in range(len(self.vList)):
             self.vList[n].locate()
