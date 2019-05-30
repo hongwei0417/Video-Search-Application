@@ -12,6 +12,7 @@ class Youtube:
         Driver.switchTab(self.browser, 0)
         url = self.url + keyword
         self.browser.get(url)
+        Driver.video_filter(self.browser, filter, "youtube")
         self.updateSoup()
 
     def updateSoup(self):

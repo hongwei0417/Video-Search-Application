@@ -45,7 +45,7 @@ def loadVideo(user, frame):
 
 def create(user):
         window = tk.Toplevel()
-        window.title('My Collections')
+        window.title(user[2] + "的搜尋列表")
         ws = window.winfo_screenwidth() # width of the screen
         hs = window.winfo_screenheight() # height of the screen
         x = (ws/2) - (ww/2)

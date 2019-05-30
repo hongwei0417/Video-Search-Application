@@ -19,13 +19,13 @@ class Bili:
         }
         Driver.newTab(self.browser)
 
-    def search(self, keyword):
+    def search(self, keyword, filter):
         Driver.switchTab(self.browser, 1)
         self.keyword = keyword
         url = self.url + keyword
         self.browser.get(url)
         time.sleep(1)
-        Driver.relevance(self.browser, 'bilibili')
+        Driver.video_filter(self.browser, filter, "bilibili")
         Driver.scrollLazy(self.browser, 4, 2)
         self.updateSoup()
         self.clearData()

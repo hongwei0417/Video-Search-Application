@@ -23,8 +23,10 @@ def register(uid, password, name):
         cursor.execute("INSERT INTO user VALUES ('" + uid + "','" + password + "','" + name + "','" + currentTime + "')")
         conn.commit()
         print("註冊成功!")
+        return True
     except:
         print("註冊失敗!")
+        return False
 
 
 def login(uid, password):

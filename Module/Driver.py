@@ -2,9 +2,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 
-def setWindow(browser, x, y):
+def setWindow(browser, x, y, w, h):
     browser.set_window_position(x, y)
-    browser.set_window_size(700, 500)
+    browser.set_window_size(w, h)
 
 def scrollToButtom(browser):
     elm = browser.find_element_by_tag_name('html')
@@ -50,42 +50,53 @@ def relevance(browser, type):
     time.sleep(1)
 
 
-def uploadDate(browser, type):
-    if type == 'youtube':
+def uploadDate(browser, _type):
+    if _type == 'youtube':
         link = browser.find_element_by_css_selector("#container > ytd-toggle-button-renderer > a")
         link.click()
         link = browser.find_element_by_css_selector("#collapse-content > ytd-search-filter-group-renderer:nth-child(5) > ytd-search-filter-renderer:nth-child(4) a")
         link.click()
-    elif type == 'bilibili':
+    elif _type == 'bilibili':
         link = browser.find_element_by_css_selector("div.filter-wrap > ul.filter-type.clearfix.order > li:nth-child(3) > a")
         link.click()
     
     time.sleep(1)
 
 
-def viewCount(browser, type):
-    if type == 'youtube':
+def viewCount(browser, _type):
+    if _type == 'youtube':
         link = browser.find_element_by_css_selector("#container > ytd-toggle-button-renderer > a")
         link.click()
         link = browser.find_element_by_css_selector("#collapse-content > ytd-search-filter-group-renderer:nth-child(5) > ytd-search-filter-renderer:nth-child(6) a")
         link.click()
-    elif type == 'bilibili':
+    elif _type == 'bilibili':
         link = browser.find_element_by_css_selector("div.filter-wrap > ul.filter-type.clearfix.order > li:nth-child(2) > a")
         link.click()
     
     time.sleep(1)
 
 
-def score(browser, type):
-    if type == 'youtube':
+def score(browser, _type):
+    if _type == 'youtube':
         link = browser.find_element_by_css_selector("#container > ytd-toggle-button-renderer > a")
         link.click()
         link = browser.find_element_by_css_selector("#collapse-content > ytd-search-filter-group-renderer:nth-child(5) > ytd-search-filter-renderer:nth-child(7) a")
         link.click()
-    elif type == 'bilibili':
+    elif _type == 'bilibili':
         link = browser.find_element_by_css_selector("div.filter-wrap > ul.filter-type.clearfix.order > li:nth-child(4) > a")
         link.click()
     
     time.sleep(1)
+
+
+def video_filter(browser, filter, _type):
+    if filter == 1:
+        relevance(browser, _type)
+    elif filter == 2:
+        uploadDate(browser, _type)
+    elif filter == 3:
+        viewCount(browser, _type)
+    elif filter == 4:
+        score(browser, _type)
 
 

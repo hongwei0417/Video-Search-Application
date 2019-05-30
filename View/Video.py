@@ -7,6 +7,7 @@ from Module.Youtube import Youtube
 from Module.Facebook import Facebook
 from Module.Bili import Bili
 import Module.DB as Db
+import Module.Driver as Driver
 
 x = 0
 y = 0
@@ -23,21 +24,22 @@ def onFrameConfigure(canvas):
         canvas.configure(scrollregion=canvas.bbox("all"))
 
 def init(user, browser):
+        Driver.setWindow(browser, 300, 200, 900, 700)
         yt = Youtube(browser)
         bili = Bili(browser)
         # fb = Facebook(browser)
         create(user, [yt, bili])
 
-def search_All(engines, vlists, text):
+def search_All(engines, vlists, text, filter):
         if(not(text.strip() == '')):
-                search(engines[0], vlists[0], text)
-                search(engines[1], vlists[1], text)
+                search(engines[0], vlists[0], text, filter)
+                search(engines[1], vlists[1], text, filter)
                 # search(engines[2], vlists[2], text)
         else:
                 print('搜尋字串空白')
 
-def search(engine, vlist, text):
-        engine.search(text.strip())
+def search(engine, vlist, text, filter):
+        engine.search(text.strip(), filter)
         data = engine.getData()
         count = len(data['imgs'])
         while(count < 12):
@@ -80,6 +82,9 @@ def create(user, engines):
         top_frame = tk.Frame(frame, bg=top_bgc, width=ww, height=60)
         top_frame.place(x=0, y=0)
 
+        name_lb = tk.Label(top_frame, bg=fbgc, text=user[2], fg='#aaaaaa', font=('Arial', 20))
+        name_lb.place(x=20, y=15)
+
         search_tb = tk.Entry(
                         top_frame,
                         width=30, bg='#383838',
@@ -90,7 +95,7 @@ def create(user, engines):
                         relief="flat",
                         font=('Verdana',20),
                         )
-        search_tb.place(x=20, y=15)
+        search_tb.place(x=150, y=15)
         
 
         search_btn = tk.Button(top_frame, 
@@ -99,7 +104,7 @@ def create(user, engines):
                                 highlightbackground='#d8d8d8', 
                                 highlightthickness=0,
                                 )
-        search_btn.place(x=450, y=17, height=30, width=50)
+        search_btn.place(x=600, y=17, height=30, width=50)
 
         var = tk.IntVar()
         var.set(1)
@@ -108,10 +113,10 @@ def create(user, engines):
         rb3 = tk.Radiobutton(top_frame, text="觀看次數", variable=var, value=3, bg="#adadad", selectcolor="#fcf5bf", indicatoron=0)
         rb4 = tk.Radiobutton(top_frame, text="評價與評分", variable=var, value=4, bg="#adadad", selectcolor="#fcf5bf", indicatoron=0)
 
-        rb1.place(x=600, y=20)
-        rb2.place(x=680, y=20)
-        rb3.place(x=770, y=20)
-        rb4.place(x=860, y=20)
+        rb1.place(x=700, y=20)
+        rb2.place(x=780, y=20)
+        rb3.place(x=850, y=20)
+        rb4.place(x=920, y=20)
 
         collec_btn = tk.Button(top_frame, 
                                 text="喜愛", 
@@ -119,7 +124,7 @@ def create(user, engines):
                                 highlightbackground='#d8d8d8', 
                                 highlightthickness=0,
                                 )
-        collec_btn.place(x=1000, y=17, height=30, width=50)
+        collec_btn.place(x=1050, y=17, height=30, width=50)
 
         ytList = VideoList(frame)
         ytList.set(user, "youtube", logoUrl[0], links[0], engines[0])
@@ -134,9 +139,9 @@ def create(user, engines):
         # fbList.setPos(30, 920)
 
 
-        search_btn.bind('<Button-1>', lambda e: search_All(engines, [ytList, biliList], search_tb.get()))
+        search_btn.bind('<Button-1>', lambda e: search_All(engines, [ytList, biliList], search_tb.get(), var.get()))
         collec_btn.bind('<Button-1>', lambda e: openCollection(user))
-        window.bind('<Return>', lambda e:search_All(engines, [ytList, biliList], search_tb.get()))
+        window.bind('<Return>', lambda e:search_All(engines, [ytList, biliList], search_tb.get(), var.get()))
 
         window.mainloop()
 

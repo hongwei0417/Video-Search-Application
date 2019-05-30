@@ -28,7 +28,6 @@ class VideoItem:
     def delete(self, user, link, frame, refresh):
         try:
             Db.delCollection(user[0], link)
-            # self.frame.destroy()
         except:
             print("刪除最愛失敗!")
 
