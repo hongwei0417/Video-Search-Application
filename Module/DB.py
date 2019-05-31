@@ -20,7 +20,7 @@ def checkUser(uid):
 def register(uid, password, name):
     try:
         currentTime = str(datetime.datetime.now())
-        cursor.execute("INSERT INTO user VALUES ('" + uid + "','" + password + "','" + name + "','" + currentTime + "')")
+        cursor.execute("INSERT INTO user VALUES (?, ?, ?, ?)", (uid, password, name, currentTime))
         conn.commit()
         print("註冊成功!")
         return True
@@ -39,10 +39,11 @@ def login(uid, password):
     else:
         return False
 
-def getCollection(uid):
+def getCollection(uid, _type):
     try:
         dataList = []
-        rows = cursor.execute("SELECT * FROM video WHERE uid = '" + uid + "'")
+        filter_str =  " and type = '" + _type + "'" if _type != "all" else ""
+        rows = cursor.execute("SELECT * FROM video WHERE uid = '" + uid + "' " + filter_str)
         for row in rows:
             data = {}
             data['type'] = row[1]
@@ -60,7 +61,7 @@ def getCollection(uid):
 
 def addCollection(uid, ty, img, title, author, view, des, link):
     # try:
-    cursor.execute("SELECT * FROM video WHERE link = '" + link + "'")
+    cursor.execute("SELECT * FROM video WHERE img = '" + img + "'")
     video = cursor.fetchone()
     if(video == None):
         cursor.execute("INSERT INTO video VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
@@ -79,3 +80,13 @@ def delCollection(uid, link):
     except:
         print("刪除失敗!")
 
+
+def getAllUser():
+    try:
+        users = cursor.execute("select user.*, count(video.uid) \
+                                from user LEFT JOIN \
+                                video on user.uid = video.uid\
+                                GROUP by user.uid")
+        return users
+    except:
+        print("使用者查詢失敗")

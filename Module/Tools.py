@@ -9,6 +9,7 @@ from urllib.request import urlopen
 
 _nonbmp = re.compile(r'[\U00010000-\U0010FFFF]')
 
+
 emoji_pattern = re.compile(
     u"(\ud83d[\ude00-\ude4f])|"  # emoticons
     u"(\ud83c[\udf00-\uffff])|"  # symbols & pictographs (1 of 2)

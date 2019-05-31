@@ -38,7 +38,7 @@ def search_All(engines, vlists, text, filter, window, overlayer):
                 search(engines[1], vlists[1], text, filter)
                 # search(engines[2], vlists[2], text)
         else:
-                print('搜尋字串空白')
+                messagebox.showerror("提醒", "請輸入搜尋內容!")
 
         overlayer.place_forget()
 
@@ -64,7 +64,7 @@ def openCollection(user):
 
 def create(user, engines):
         window = tk.Tk()
-        window.title(user[2] + "的影片搜搜")
+        window.title(user[2] + "  的影片搜搜")
         ws = window.winfo_screenwidth() # width of the screen
         hs = window.winfo_screenheight() # height of the screen
         x = (ws/2) - (ww/2)
@@ -124,13 +124,8 @@ def create(user, engines):
         rb3.place(x=875, y=20)
         rb4.place(x=950, y=20)
 
-        collec_btn = tk.Button(top_frame, 
-                                text="我的最愛", 
-                                fg='#373737', 
-                                highlightbackground='#d8d8d8', 
-                                highlightthickness=0,
-                                )
-        collec_btn.place(x=1070, y=17, height=30, width=60)
+        collec_btn = tk.Label(top_frame, text="★", font=('Arial', 40), bg=top_bgc, fg='#f8f499')
+        collec_btn.place(x=ww-97, y=0, height=60, width=80)
 
         ytList = VideoList(frame)
         ytList.set(user, "youtube", logoUrl[0], links[0], engines[0])

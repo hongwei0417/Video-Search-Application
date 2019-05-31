@@ -49,9 +49,11 @@ class Video:
             self.views.config(text=view)
         except:
             t = with_surrogates(title)
+            a = with_surrogates(author)
+            v = with_surrogates(view)
             self.title.config(text=remove_emoji(t))
-            self.author.config(text=remove_emoji(author))
-            self.views.config(text=remove_emoji(view))
+            self.author.config(text=remove_emoji(a))
+            self.views.config(text=remove_emoji(v))
 
     def clear(self):
         self.frame.destroy()
