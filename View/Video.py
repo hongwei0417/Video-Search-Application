@@ -8,6 +8,7 @@ from Module.Facebook import Facebook
 from Module.Bili import Bili
 import Module.DB as Db
 import Module.Driver as Driver
+import View.Welcome as Welcome
 
 x = 0
 y = 0
@@ -28,7 +29,7 @@ def init(user, browser):
         yt = Youtube(browser)
         bili = Bili(browser)
         # fb = Facebook(browser)
-        create(user, [yt, bili])
+        create(user, [yt, bili], browser)
 
 def search_All(engines, vlists, text, filter, window, overlayer):
         overlayer.place(x=300, y=280)
@@ -60,9 +61,14 @@ def search(engine, vlist, text, filter):
 
 def openCollection(user):
         Collection.create(user)
-                
 
-def create(user, engines):
+
+def logout(browser, window):
+        window.destroy()
+        browser.minimize_window()
+        Welcome.create(browser)
+
+def create(user, engines, browser):
         window = tk.Tk()
         window.title(user[2] + "  的影片搜搜")
         ws = window.winfo_screenwidth() # width of the screen
@@ -135,6 +141,11 @@ def create(user, engines):
         biliList.set(user, "bilibili", logoUrl[1], links[1], engines[1])
         biliList.setPos(30, 500)
 
+
+        logout_btn = tk.Label(frame, text="登出", font=('Arial', 20), bg=top_bgc, fg='#f8f499')
+        logout_btn.place(x=20, y=70, height=40, width=60)
+
+
         # fbList = VideoList(frame)
         # fbList.set(user, "bilibili", logoUrl[2], links[2], engines[2])
         # fbList.setPos(30, 920)
@@ -145,6 +156,7 @@ def create(user, engines):
 
         search_btn.bind('<Button-1>', lambda e: search_All(engines, [ytList, biliList], search_tb.get(), var.get(), window, overlayer))
         collec_btn.bind('<Button-1>', lambda e: openCollection(user))
+        logout_btn.bind('<Button-1>', lambda e: logout(browser, window))
         window.bind('<Return>', lambda e:search_All(engines, [ytList, biliList], search_tb.get(), var.get(), window, overlayer))
 
         window.mainloop()
