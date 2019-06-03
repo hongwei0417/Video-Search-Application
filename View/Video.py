@@ -99,7 +99,7 @@ def create(user, engines, browser):
 
         search_tb = tk.Entry(
                         top_frame,
-                        width=39, bg='#383838',
+                        width=36, bg='#383838',
                         highlightbackground="#303030",
                         highlightthickness=2,
                         highlightcolor='#666666',
@@ -107,7 +107,7 @@ def create(user, engines, browser):
                         relief="flat",
                         font=('Verdana',20),
                         )
-        search_tb.place(x=190, y=12, height=40)
+        search_tb.place(x=240, y=12, height=40)
         
 
         search_btn = tk.Button(top_frame, 
@@ -116,7 +116,7 @@ def create(user, engines, browser):
                                 highlightbackground='#d8d8d8', 
                                 highlightthickness=0,
                                 )
-        search_btn.place(x=650, y=17, height=30, width=50)
+        search_btn.place(x=657, y=17, height=30, width=50)
 
         var = tk.IntVar()
         var.set(1)
@@ -133,6 +133,14 @@ def create(user, engines, browser):
         collec_btn = tk.Label(top_frame, text="★", font=('Arial', 40), bg=top_bgc, fg='#f8f499')
         collec_btn.place(x=ww-97, y=0, height=60, width=80)
 
+        logout_btn = search_btn = tk.Button(top_frame, 
+                                text="登出", 
+                                fg='#373737', 
+                                highlightbackground='#d8d8d8', 
+                                highlightthickness=0,
+                                )
+        logout_btn.place(x=180, y=19, height=25, width=35)
+
         ytList = VideoList(frame)
         ytList.set(user, "youtube", logoUrl[0], links[0], engines[0])
         ytList.setPos(30, 80)
@@ -140,10 +148,6 @@ def create(user, engines, browser):
         biliList = VideoList(frame)
         biliList.set(user, "bilibili", logoUrl[1], links[1], engines[1])
         biliList.setPos(30, 500)
-
-
-        logout_btn = tk.Label(frame, text="登出", font=('Arial', 20), bg=top_bgc, fg='#f8f499')
-        logout_btn.place(x=20, y=70, height=40, width=60)
 
 
         # fbList = VideoList(frame)
