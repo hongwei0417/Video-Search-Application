@@ -30,6 +30,7 @@ class Bili:
         self.updateSoup()
         self.clearData()
         self.appendData()
+        
 
     def updateSoup(self):
         source = self.browser.page_source
@@ -75,6 +76,7 @@ class Bili:
 
 
     def getMore(self):
+        self.page += 1
         Driver.switchTab(self.browser, 1)
         url = self.url + self.keyword + "&page=" + str(self.page)
         self.browser.get(url)
@@ -82,7 +84,6 @@ class Bili:
         Driver.scrollLazy(self.browser, 3, 2)
         self.updateSoup()
         self.appendData()
-        self.page += 1
             
         return self.data
 

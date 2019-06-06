@@ -31,20 +31,25 @@ def init(user, browser):
         # fb = Facebook(browser)
         create(user, [yt, bili], browser)
 
-def search_All(engines, vlists, text, filter, window, overlayer):
-        overlayer.place(x=300, y=280)
-        window.update()
-        if(not(text.strip() == '')):
-                search(engines[0], vlists[0], text, filter)
-                search(engines[1], vlists[1], text, filter)
-                # search(engines[2], vlists[2], text)
-        else:
-                messagebox.showerror("提醒", "請輸入搜尋內容!")
+def search_All(browser, engines, vlists, text, filter, window, overlayer):
+        try:
+                overlayer.place(x=300, y=280)
+                window.update()
+                if(not(text.strip() == '')):
+                        search(engines[0], vlists[0], text, filter)
+                        search(engines[1], vlists[1], text, filter)
+                        # search(engines[2], vlists[2], text)
+                else:
+                        messagebox.showerror("提醒", "請輸入搜尋內容!")
+        except:
+                messagebox.showerror("提醒", "搜尋發生錯誤！")
+        finally:
+                overlayer.place_forget()
+                Driver.setWindow(browser, 300, 90, 900, 700)
 
-        overlayer.place_forget()
+        
 
 def search(engine, vlist, text, filter):
-        
         engine.search(text.strip(), filter)
         data = engine.getData()
         count = len(data['imgs'])
@@ -57,6 +62,7 @@ def search(engine, vlist, text, filter):
         vlist.page = 1
         vlist.setData(data)
         vlist.load()
+        
 
 
 def openCollection(user):
@@ -158,10 +164,10 @@ def create(user, engines, browser):
         overlayer = tk.Label(window, bg=fbgc, text="請等候  搜尋中...", fg='#aaaaaa', font=('Arial', 80))
 
 
-        search_btn.bind('<Button-1>', lambda e: search_All(engines, [ytList, biliList], search_tb.get(), var.get(), window, overlayer))
+        search_btn.bind('<Button-1>', lambda e: search_All(browser, engines, [ytList, biliList], search_tb.get(), var.get(), window, overlayer))
         collec_btn.bind('<Button-1>', lambda e: openCollection(user))
         logout_btn.bind('<Button-1>', lambda e: logout(browser, window))
-        window.bind('<Return>', lambda e:search_All(engines, [ytList, biliList], search_tb.get(), var.get(), window, overlayer))
+        window.bind('<Return>', lambda e:search_All(browser, engines, [ytList, biliList], search_tb.get(), var.get(), window, overlayer))
 
         window.mainloop()
 

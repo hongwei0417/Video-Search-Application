@@ -15,7 +15,7 @@ class Video:
     def __init__(self, frame):
         self.w = 140
         self.h = 200
-        self.fbgc = "#1C1C1C"
+        self.fbgc = "#262626"
         self.frame = tk.Frame(frame, width=self.w, height=self.h, bg=self.fbgc)
         self.video = tk.Button(self.frame, borderwidth=0, highlightbackground=self.fbgc, relief="groove")
         self.title = tk.Label(self.frame, wraplength=130, bg=self.fbgc, fg="white", font=('Arial', 12), anchor="n", justify = 'left')
@@ -81,7 +81,7 @@ class VideoList:
         self.pageCount = 12 # 一頁要顯示的數目
         self.fh = 400
         self.fw = 1100
-        self.fbgc = "#1C1C1C"
+        self.fbgc = "#262626"
         self.vList = []
         self.frame = tk.Frame(frame, bg=self.fbgc, width=self.fw, height=self.fh)
         self.logo = tk.Label(self.frame, bg=self.fbgc, borderwidth=0)

@@ -45,7 +45,7 @@ def loadVideo(user, frame, lbs, n, overlayer):
         dataList = getData(user, n)
 
         if len(dataList) == 0:
-                overlayer.place(x=200, y=200)
+                overlayer.place(x=250, y=220)
         else:
                 overlayer.place_forget()
 

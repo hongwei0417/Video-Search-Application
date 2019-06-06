@@ -1,5 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+import tkinter.messagebox as messagebox
 import time
 
 def setWindow(browser, x, y, w, h):
@@ -10,6 +11,7 @@ def scrollToButtom(browser):
     elm = browser.find_element_by_tag_name('html')
     elm.send_keys(Keys.END)
     time.sleep(2)
+    
 
 def scrollLazy(browser, times, wait):
     maxH = browser.execute_script("return document.body.scrollHeight")
@@ -21,6 +23,7 @@ def scrollLazy(browser, times, wait):
         time.sleep(wait)
         if(currentH > maxH): break
     
+    
     # browser.execute_script("window.onblur = function() { window.onfocus() }")
     # browser.execute_script('alert("Focus window")')
     # browser.switch_to.alert.accept()
@@ -28,6 +31,7 @@ def scrollLazy(browser, times, wait):
 
 def switchTab(browser, index):
     browser.switch_to_window(browser.window_handles[index])
+    
     # browser.find_element_by_tag_name('html').send_keys(Keys.COMMAND + Keys.NUMPAD2)
 
 
@@ -48,6 +52,7 @@ def relevance(browser, type):
         link.click()
     
     time.sleep(1)
+    
 
 
 def uploadDate(browser, _type):
@@ -61,6 +66,7 @@ def uploadDate(browser, _type):
         link.click()
     
     time.sleep(1)
+    
 
 
 def viewCount(browser, _type):
@@ -74,6 +80,7 @@ def viewCount(browser, _type):
         link.click()
     
     time.sleep(1)
+    
 
 
 def score(browser, _type):
@@ -87,6 +94,7 @@ def score(browser, _type):
         link.click()
     
     time.sleep(1)
+    
 
 
 def video_filter(browser, filter, _type):

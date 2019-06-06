@@ -1,5 +1,6 @@
 import tkinter as tk
 from Module.Tools import openLocal, openOnline, with_surrogates, remove_emoji
+import tkinter.messagebox as messagebox
 import Module.DB as Db
 import webbrowser
 
@@ -28,7 +29,8 @@ class VideoItem:
 
     def delete(self, user, link, frame, lbs, refresh, layer):
         try:
-            Db.delCollection(user[0], link)
+            if (messagebox.askquestion("刪除蒐藏", "確定要刪除此蒐藏？") == messagebox.YES):
+                Db.delCollection(user[0], link)
         except:
             print("刪除最愛失敗!")
 
