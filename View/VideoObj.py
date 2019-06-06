@@ -87,6 +87,8 @@ class VideoList:
         self.logo = tk.Label(self.frame, bg=self.fbgc, borderwidth=0)
         self.up = tk.Button(self.frame, text="▲", font=50, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
         self.down = tk.Button(self.frame, text="▼", font=50, bg=self.fbgc, fg='#373737', highlightbackground='#d8d8d8', highlightthickness=0)
+        self.pageLb = tk.Label(self.frame, text="1", font=('Arial', 20), bg="#272727", fg='#f8f499')
+
 
     def set(self, user, ty, logoUrl, link, engine):
         logoImg = openLocal(logoUrl, 100, 60)
@@ -138,10 +140,12 @@ class VideoList:
         if self.page > 1:
             data = engine.getData()
             self.page -= 1
+            self.pageLb.configure(text = str(self.page))
             self.setData(data)
 
     def nextPage(self, engine):
         self.page += 1
+        self.pageLb.configure(text = str(self.page))
         data = engine.getData()
         count = len(data['imgs'])
         while(count < self.page * self.pageCount):
@@ -181,5 +185,6 @@ class VideoList:
         self.logo.place(x=20, y=20)
         self.up.place(x=self.fw-50, y=30, height=40, width=40)
         self.down.place(x=self.fw-50, y=330, height=40, width=40)
+        self.pageLb.place(x=self.fw-45, y=175)
         for n in range(len(self.vList)):
             self.vList[n].locate()

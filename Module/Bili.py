@@ -50,29 +50,50 @@ class Bili:
         }
 
     def appendData(self):
-        video_obj = self.soup.select('.video-contain .video')
+        n = 0 # 嘗試重新取得資料次數
+        while(n < 3):
+            imgs, titles, authors, views, hrefs, descriptions = [], [], [], [], [], []
+            
+            video_obj = self.soup.select('.video-contain .video')
+            success = True
+            for video in video_obj:
+                img_obj = video.select('.img img')[0]
+                
+                if img_obj.has_attr('src') and img_obj['src'] != "": # 判斷有沒有圖片
+                    img = "https:" + img_obj['src']
+                    title = video.select('.info .title')[0]['title']
+                    author = video.select('.info .tags .up-name')[0].text
+                    view = video.select('.info .tags .watch-num')[0].text.strip()
+                    description = video.select('.info .des')[0].text.strip()
+                    print(img)
+                    href = video.select('.img-anchor')[0]['href']
+                    imgs.append(img)
+                    titles.append(title)
+                    authors.append(author)
+                    views.append(format_view(view))
+                    hrefs.append(href)
+                    descriptions.append(description)
+                else:
+                    Driver.scrollToTop(self.browser)
+                    Driver.scrollLazy(self.browser, 4, 0.5)
+                    self.updateSoup()
+                    success = False
+                    break
 
-        for video in video_obj:
-            img_obj = video.select('.img img')[0]
+            if success:
+                self.data['imgs'].extend(imgs)
+                self.data['titles'].extend(titles)
+                self.data['authors'].extend(authors)
+                self.data['views'].extend(views)
+                self.data['hrefs'].extend(hrefs)
+                self.data['descriptions'].extend(descriptions)
+                print(len(self.data['imgs']), len(self.data['hrefs']), len(self.data['titles']),len(self.data['authors']),len(self.data['views']), len(self.data['descriptions']))
+                return True
+            
+            n += 1
 
-            if img_obj.has_attr('src'): # 判斷有沒有圖片
-                img = "https:" + img_obj['src']
-                title = video.select('.info .title')[0]['title']
-                author = video.select('.info .tags .up-name')[0].text
-                view = video.select('.info .tags .watch-num')[0].text.strip()
-                description = video.select('.info .des')[0].text.strip()
-                print(img)
-                href = video.select('.img-anchor')[0]['href']
-                self.data['imgs'].append(img)
-                self.data['titles'].append(title)
-                self.data['authors'].append(author)
-                self.data['views'].append(format_view(view))
-                self.data['hrefs'].append(href)
-                self.data['descriptions'].append(description)
-            else:
-                continue # 沒有圖片就放棄取下一個影片
         
-        print(len(self.data['imgs']), len(self.data['hrefs']), len(self.data['titles']),len(self.data['authors']),len(self.data['views']), len(self.data['descriptions']))
+        return False
 
 
     def getMore(self):
@@ -83,7 +104,13 @@ class Bili:
         time.sleep(1)
         Driver.scrollLazy(self.browser, 3, 2)
         self.updateSoup()
+<<<<<<< HEAD
         self.appendData()
+=======
+        success = self.appendData()
+        if success:
+            self.page += 1
+>>>>>>> f63b522cfe06dd8ec89687d72aa39033b0a98ed1
             
         return self.data
 
