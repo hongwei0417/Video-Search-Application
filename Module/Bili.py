@@ -30,7 +30,7 @@ class Bili:
         self.updateSoup()
         self.clearData()
         self.appendData()
-        
+
 
     def updateSoup(self):
         source = self.browser.page_source
@@ -104,13 +104,9 @@ class Bili:
         time.sleep(1)
         Driver.scrollLazy(self.browser, 3, 2)
         self.updateSoup()
-<<<<<<< HEAD
-        self.appendData()
-=======
         success = self.appendData()
         if success:
             self.page += 1
->>>>>>> f63b522cfe06dd8ec89687d72aa39033b0a98ed1
             
         return self.data
 

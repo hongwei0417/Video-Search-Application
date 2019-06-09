@@ -1,0 +1,166 @@
+1559838345833	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/bk/rq60gr516t90n179dq2_dt0h0000gn/T/rust_mozprofile.K9TSXVKnsWzb"
+1559838346394	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1559838346394	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1559838346394	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1559838347891	Marionette	INFO	Listening on port 56710
+1559838347989	Marionette	WARN	TLS certificate errors will be ignored for this session
+1559838370903	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+bail@chrome://marionette/content/sync.js:224:64
+[Parent 5832, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 5832, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 5832, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 5832, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 5832, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 5832, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 5832, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 5832, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 5832, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:190:13
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0xE0008,name=PBackgroundIDBTransaction::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PBackgroundIDBTransaction::Msg_DeleteMe Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1559838522830	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+bail@chrome://marionette/content/sync.js:224:64
+1559838534545	Marionette	INFO	Stopped listening on port 56710
+1559894691644	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/bk/rq60gr516t90n179dq2_dt0h0000gn/T/rust_mozprofile.rUyw3nPOhiCy"
+1559894692231	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1559894692231	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1559894692232	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1559894693849	Marionette	INFO	Listening on port 49488
+1559894693943	Marionette	WARN	TLS certificate errors will be ignored for this session
+1559894802167	Marionette	INFO	Stopped listening on port 49488
+1559894810682	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/bk/rq60gr516t90n179dq2_dt0h0000gn/T/rust_mozprofile.NG2p3K9qFxVv"
+1559894811287	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1559894811287	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1559894811287	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1559894813045	Marionette	INFO	Listening on port 49571
+1559894813149	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:190:13
+
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Socket is not connected: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 1181, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+1559895384988	Marionette	INFO	Stopped listening on port 49571
+1559919440341	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "-marionette" "-foreground" "-no-remote" "-profile" "/var/folders/bk/rq60gr516t90n179dq2_dt0h0000gn/T/rust_mozprofile.yemV4McIZMPg"
+1559919440937	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1559919440938	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1559919440938	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1559919442514	Marionette	INFO	Listening on port 49336
+1559919442541	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:190:13
+
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Socket is not connected: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+[Parent 853, Gecko_IOThread] WARNING: pipe error: Broken pipe: file /builds/worker/workspace/build/src/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 726
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0xE0008,name=PBackgroundIDBTransaction::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PBackgroundIDBTransaction::Msg_DeleteMe Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1559920485974	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+bail@chrome://marionette/content/sync.js:224:64
+1559920506821	Marionette	INFO	Stopped listening on port 49336

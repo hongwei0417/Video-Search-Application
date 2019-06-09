@@ -136,7 +136,7 @@ def create(browser):
                                 )
 
 
-        title.place(x=90, y=40)
+        title.place(x=110, y=40)
         rb1.place(x=50, y=130, width=100)
         rb2.place(x=150, y=130, width=100)
 
