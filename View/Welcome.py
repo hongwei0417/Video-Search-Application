@@ -41,8 +41,8 @@ def commit(var, _id, _psd, _name, browser, window):
         id = _id.get().strip()
         psd = _psd.get().strip()
         name = _name.get().strip()
-        if var.get() == 1:
-                if id != "" or psd != "":
+        if var.get() == 1: # 登入
+                if id != "" and psd != "":
                         user = Db.login(id, psd)
                         if user:
                                 window.destroy()
@@ -52,8 +52,8 @@ def commit(var, _id, _psd, _name, browser, window):
                 else:
                         messagebox.showerror("登入失敗", "請勿空白!")
                 
-        else:
-                if id != "" or psd != "" or psd != "":
+        else:   # 註冊
+                if id != "" and name != "" and psd != "":
                         user = Db.checkUser(id)
                         if user == None:
                                 result = Db.register(id, psd, name)

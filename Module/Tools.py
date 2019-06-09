@@ -34,18 +34,48 @@ def openOnline(url, w, h):
     return img
 
 def _surrogatepair(match):
+    # try:
+    #     char = match.group()
+    #     assert ord(char) > 0xffff
+    #     encoded = char.encode('utf-16-le')
+    #     t = (
+    #         chr(int.from_bytes(encoded[:2], 'little')) + 
+    #         chr(int.from_bytes(encoded[2:], 'little'))
+    #     )
+    #     return t
+    # except ValueError:
+    #     print(ValueError)
+    #     return ""
+
     char = match.group()
     assert ord(char) > 0xffff
     encoded = char.encode('utf-16-le')
-    return (
+    t = (
         chr(int.from_bytes(encoded[:2], 'little')) + 
-        chr(int.from_bytes(encoded[2:], 'little')))
+        chr(int.from_bytes(encoded[2:], 'little'))
+    )
+    return t
 
 def with_surrogates(text):
-    return _nonbmp.sub(_surrogatepair, text)
+    # try:
+    #     t = _nonbmp.sub(_surrogatepair, text)
+    #     return t
+    # except ValueError:
+    #     print(ValueError)
+    #     return text
+    t = _nonbmp.sub(_surrogatepair, text)
+    return t
 
 def remove_emoji(text):
-    return emoji_pattern.sub(r'', text)
+    # try:
+    #     t = emoji_pattern.sub(r'', text)
+    #     return t
+    # except ValueError:
+    #     print(ValueError)
+    #     return ""
+
+    t = emoji_pattern.sub(r'', text)
+    return t
 
 def show():
     messagebox.showinfo("蒐藏", "影片已加入蒐藏")

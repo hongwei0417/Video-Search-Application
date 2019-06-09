@@ -43,7 +43,7 @@ def getData(user, n):
 def loadVideo(user, frame, lbs, n, overlayer):
         set_lb(n, lbs)
         dataList = getData(user, n)
-
+        # print(dataList)
         if len(dataList) == 0:
                 overlayer.place(x=250, y=220)
         else:

@@ -46,19 +46,26 @@ class VideoItem:
     
     def setInfo(self, title, author, view, intro):
         try:
-            self.title.config(text=title)
-            self.author.config(text=author)
-            self.views.config(text=view)
-            self.intro.config(text=intro)
-        except:
             t = with_surrogates(title)
-            a = with_surrogates(author)
-            v = with_surrogates(view)
-            i = with_surrogates(intro)
             self.title.config(text=remove_emoji(t))
+        except:
+            self.title.config(text="")
+
+        try:
+            a = with_surrogates(author)
             self.author.config(text=remove_emoji(a))
-            self.views.config(text=remove_emoji(v))
+        except:
+            self.author.config("")
+
+        self.views.config(text=view)
+
+        try:
+            i = with_surrogates(intro)
+            print(i)
             self.intro.config(text=remove_emoji(i))
+            
+        except:
+            self.intro.config(text="")
         
     def setPos(self, x, y):
         self.x = x
