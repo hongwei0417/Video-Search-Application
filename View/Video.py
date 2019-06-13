@@ -35,13 +35,14 @@ def search_All(browser, engines, vlists, text, filter, window, overlayer):
         try:
                 overlayer.place(x=300, y=280)
                 window.update()
-                if(not(text.strip() == '')):
+                if(text.strip() != ''):
                         search(engines[0], vlists[0], text, filter)
                         search(engines[1], vlists[1], text, filter)
                         # search(engines[2], vlists[2], text)
                 else:
                         messagebox.showerror("提醒", "請輸入搜尋內容!")
-        except:
+        except ValueError:
+                print(ValueError)
                 messagebox.showerror("提醒", "搜尋發生錯誤！")
         finally:
                 overlayer.place_forget()
@@ -139,7 +140,7 @@ def create(user, engines, browser):
         collec_btn = tk.Label(top_frame, text="★", font=('Arial', 40), bg=top_bgc, fg='#f8f499')
         collec_btn.place(x=ww-97, y=0, height=60, width=80)
 
-        logout_btn = search_btn = tk.Button(top_frame, 
+        logout_btn = tk.Button(top_frame, 
                                 text="登出", 
                                 fg='#373737', 
                                 highlightbackground='#d8d8d8', 
@@ -161,13 +162,14 @@ def create(user, engines, browser):
         # fbList.setPos(30, 920)
 
 
-        overlayer = tk.Label(window, bg=fbgc, text="請等候  搜尋中...", fg='#aaaaaa', font=('Arial', 80))
+        overlayer = tk.Label(frame, bg=fbgc, text="請等候  搜尋中...", fg='#aaaaaa', font=('Arial', 80))
 
 
+        window.bind('<Return>', lambda e:search_All(browser, engines, [ytList, biliList], search_tb.get(), var.get(), window, overlayer))
         search_btn.bind('<Button-1>', lambda e: search_All(browser, engines, [ytList, biliList], search_tb.get(), var.get(), window, overlayer))
         collec_btn.bind('<Button-1>', lambda e: openCollection(user))
         logout_btn.bind('<Button-1>', lambda e: logout(browser, window))
-        window.bind('<Return>', lambda e:search_All(browser, engines, [ytList, biliList], search_tb.get(), var.get(), window, overlayer))
+        
 
         window.mainloop()
 
